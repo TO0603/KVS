@@ -215,6 +215,11 @@ void ParticleBasedRenderer::setShaderFiles( const std::string& vert_file, const 
     static_cast<Engine&>( engine() ).setShaderFiles( vert_file, frag_file );
 }
 
+void ParticleBasedRenderer::setDisplayPointSize( float display_point_size )
+{
+    static_cast<Engine&>( engine() ).setDisplayPointSize( display_point_size );
+}
+
 void ParticleBasedRenderer::Engine::BufferObject::create(
     const kvs::ObjectBase* object,
     const size_t nmanagers )
@@ -469,7 +474,8 @@ void ParticleBasedRenderer::Engine::setup(
 
     const float Cr = ( width / width0 ) * ( height / height0 );
     const float Cs = scale / scale0;
-    const float D0 = m_initial_object_depth;
+    // const float D0 = m_initial_object_depth;
+    const float D0 = m_initial_object_depth * m_display_point_size;
     const float object_scale = Cr * Cs * dpr;
     const float object_depth = object_scale * D0;
 

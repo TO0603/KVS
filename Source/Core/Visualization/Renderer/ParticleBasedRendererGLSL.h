@@ -54,6 +54,7 @@ public:
     void setVertexShaderFile( const std::string& file );
     void setFragmentShaderFile( const std::string& file );
     void setShaderFiles( const std::string& vert_file, const std::string& frag_file );
+    void setDisplayPointSize( float display_point_size );
 
 public:
     // Deprecated method
@@ -140,6 +141,7 @@ private:
     kvs::Mat4 m_initial_projection = kvs::Mat4::Zero(); ///< initial projection matrix
     kvs::Vec4 m_initial_viewport = kvs::Vec4::Zero(); ///< initial viewport
     float m_initial_object_depth = 0.0f; ///< initial object depth
+    float m_display_point_size = 1.0f; ///< display point size
 
     BufferObject m_buffer_object; ///< buffer object
     RenderPass m_render_pass; ///< render pass
@@ -177,6 +179,7 @@ public:
     {
         m_render_pass.setShaderFiles( vert_file, frag_file );
     }
+    void setDisplayPointSize( float display_point_size ) { m_display_point_size = display_point_size; }
 
 private:
     void create_shader_program();

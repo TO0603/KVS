@@ -114,6 +114,7 @@ inline void StochasticRendererBase::setShader( const ShadingType shader )
 {
     if ( m_shader ) { delete m_shader; }
     m_shader = new ShadingType( shader );
+    m_engine->setShader( m_shader );
 }
 
 } // end of namespace kvs

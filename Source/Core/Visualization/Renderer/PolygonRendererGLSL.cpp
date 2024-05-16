@@ -422,14 +422,6 @@ void PolygonRenderer::RenderPass::create(
     kvs::ShaderSource frag( m_frag_shader_file );
     if ( enable )
     {
-        switch ( model.type() )
-        {
-        case kvs::Shader::LambertShading: frag.define("ENABLE_LAMBERT_SHADING"); break;
-        case kvs::Shader::PhongShading: frag.define("ENABLE_PHONG_SHADING"); break;
-        case kvs::Shader::BlinnPhongShading: frag.define("ENABLE_BLINN_PHONG_SHADING"); break;
-        default: break; // NO SHADING
-        }
-
         if ( model.two_side_lighting )
         {
             frag.define("ENABLE_TWO_SIDE_LIGHTING");
@@ -437,6 +429,15 @@ void PolygonRenderer::RenderPass::create(
     }
 
     m_shader_program.build( vert, frag );
+    m_shader_program.bind();
+    switch ( model.type() )
+    {
+    case kvs::Shader::LambertShading: m_shader_program.setUniform( "is_lambert_shading", true ); break;
+    case kvs::Shader::PhongShading: m_shader_program.setUniform( "is_phong_shading", true ); break;
+    case kvs::Shader::BlinnPhongShading: m_shader_program.setUniform( "is_blinn_phong_shading", true ); break;
+    default: break; // NO SHADING
+    }
+    m_shader_program.unbind();
 }
 
 /*===========================================================================*/
@@ -463,6 +464,30 @@ void PolygonRenderer::RenderPass::setup(
     const kvs::Shader::ShadingModel& model )
 {
     kvs::ProgramObject::Binder bind( m_shader_program );
+    if( model.type() == kvs::Shader::LambertShading )
+    {
+        m_shader_program.setUniform( "is_lambert_shading", true );
+        m_shader_program.setUniform( "is_phong_shading", false );
+        m_shader_program.setUniform( "is_blinn_phong_shading", false );
+    }
+    else if( model.type() == kvs::Shader::PhongShading )
+    {
+        m_shader_program.setUniform( "is_lambert_shading", false );
+        m_shader_program.setUniform( "is_phong_shading", true );
+        m_shader_program.setUniform( "is_blinn_phong_shading", false );
+    }
+    else if( model.type() == kvs::Shader::BlinnPhongShading )
+    {
+        m_shader_program.setUniform( "is_lambert_shading", false );
+        m_shader_program.setUniform( "is_phong_shading", false );
+        m_shader_program.setUniform( "is_blinn_phong_shading", true );
+    }
+    else
+    {
+        m_shader_program.setUniform( "is_lambert_shading", false );
+        m_shader_program.setUniform( "is_phong_shading", false );
+        m_shader_program.setUniform( "is_blinn_phong_shading", false );
+    }
     m_shader_program.setUniform( "shading.Ka", model.Ka );
     m_shader_program.setUniform( "shading.Kd", model.Kd );
     m_shader_program.setUniform( "shading.Ks", model.Ks );

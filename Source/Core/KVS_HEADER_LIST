@@ -23,6 +23,7 @@ FileFormat/KVSML/KVSMLStructuredVolumeObject
 FileFormat/KVSML/KVSMLTableObject
 FileFormat/KVSML/KVSMLTransferFunction
 FileFormat/KVSML/KVSMLUnstructuredVolumeObject
+FileFormat/LAS/LAS
 FileFormat/PLY/Ply
 FileFormat/PNG/Png
 FileFormat/PNM/Pbm

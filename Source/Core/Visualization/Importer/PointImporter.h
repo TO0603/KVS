@@ -9,6 +9,7 @@
 #include <kvs/Module>
 #include <kvs/PointObject>
 #include <kvs/KVSMLPointObject>
+#include <kvs/LAS>
 
 
 namespace kvs
@@ -32,6 +33,10 @@ public:
     virtual ~PointImporter();
 
     SuperClass* exec( const kvs::FileFormatBase* file_format );
+
+private:
+    void import( const kvs::KVSMLPointObject* kvsml );
+    void import( const kvs::LAS* las );
 };
 
 } // end of namespace kvs

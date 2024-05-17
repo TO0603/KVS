@@ -36,6 +36,27 @@ PointImporter::PointImporter( const std::string& filename )
     {
         BaseClass::setSuccess( SuperClass::read( filename ) );
     }
+    else if ( kvs::LAS::CheckExtension( filename ) )
+    {
+        kvs::LAS* file_format = new kvs::LAS( filename );
+        if ( !file_format )
+        {
+            BaseClass::setSuccess( false );
+            kvsMessageError("Cannot read '%s'.",filename.c_str());
+            return;
+        }
+
+        if ( file_format->isFailure() )
+        {
+            BaseClass::setSuccess( false );
+            kvsMessageError("Cannot read '%s'.",filename.c_str());
+            delete file_format;
+            return;
+        }
+
+        this->import( file_format );
+        delete file_format;
+    }
     else
     {
         BaseClass::setSuccess( false );
@@ -84,6 +105,10 @@ PointImporter::SuperClass* PointImporter::exec( const kvs::FileFormatBase* file_
     {
         BaseClass::setSuccess( SuperClass::read( file_format->filename() ) );
     }
+    else if ( const kvs::LAS* las = dynamic_cast<const kvs::LAS*>( file_format ) )
+    {
+        this->import( las );
+    }
     else
     {
         BaseClass::setSuccess( false );
@@ -92,6 +117,19 @@ PointImporter::SuperClass* PointImporter::exec( const kvs::FileFormatBase* file_
     }
 
     return this;
+}
+
+/*==========================================================================*/
+/**
+ *  @brief  Imports the LAS format data.
+ *  @param  las [in] pointer to the LAS format file
+ */
+/*==========================================================================*/
+void kvs::PointImporter::import( const kvs::LAS* las )
+{
+    SuperClass::setCoords( las->coords() );
+    SuperClass::setColors( las->colors() );
+    SuperClass::updateMinMaxCoords();
 }
 
 } // end of namespace kvs

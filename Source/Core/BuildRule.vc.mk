@@ -104,6 +104,7 @@ $(OUTDIR)\.\FileFormat\KVSML\TransferFunctionTag.obj \
 $(OUTDIR)\.\FileFormat\KVSML\UnstructuredVolumeObjectTag.obj \
 $(OUTDIR)\.\FileFormat\KVSML\ValueTag.obj \
 $(OUTDIR)\.\FileFormat\KVSML\VertexTag.obj \
+$(OUTDIR)\.\FileFormat\LAS\LAS.obj \
 $(OUTDIR)\.\FileFormat\PLY\Ply.obj \
 $(OUTDIR)\.\FileFormat\PLY\PlyFile.obj \
 $(OUTDIR)\.\FileFormat\PNG\Png.obj \
@@ -599,6 +600,12 @@ $<
 $<
 <<
 
+{.\FileFormat\LAS\}.cpp{$(OUTDIR)\.\FileFormat\LAS\}.obj::
+	IF NOT EXIST $(OUTDIR)\.\FileFormat\LAS $(MKDIR) $(OUTDIR)\.\FileFormat\LAS
+	$(CPP) /c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) /Fo$(OUTDIR)\.\FileFormat\LAS\ @<<
+$<
+<<
+
 {.\FileFormat\KVSML\}.cpp{$(OUTDIR)\.\FileFormat\KVSML\}.obj::
 	IF NOT EXIST $(OUTDIR)\.\FileFormat\KVSML $(MKDIR) $(OUTDIR)\.\FileFormat\KVSML
 	$(CPP) /c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) /Fo$(OUTDIR)\.\FileFormat\KVSML\ @<<
@@ -723,6 +730,8 @@ install::
 	$(INSTALL) .\FileFormat\JSON\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\JSON
 	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\KVSML $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\KVSML
 	$(INSTALL) .\FileFormat\KVSML\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\KVSML
+	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\LAS $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\LAS
+	$(INSTALL) .\FileFormat\LAS\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\LAS
 	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\PLY $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\PLY
 	$(INSTALL) .\FileFormat\PLY\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\PLY
 	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\PNG $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\PNG

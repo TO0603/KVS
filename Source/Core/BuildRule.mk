@@ -104,6 +104,7 @@ $(OUTDIR)/./FileFormat/KVSML/TransferFunctionTag.o \
 $(OUTDIR)/./FileFormat/KVSML/UnstructuredVolumeObjectTag.o \
 $(OUTDIR)/./FileFormat/KVSML/ValueTag.o \
 $(OUTDIR)/./FileFormat/KVSML/VertexTag.o \
+$(OUTDIR)/./FileFormat/LAS/LAS.o \
 $(OUTDIR)/./FileFormat/PLY/Ply.o \
 $(OUTDIR)/./FileFormat/PLY/PlyFile.o \
 $(OUTDIR)/./FileFormat/PNG/Png.o \
@@ -545,6 +546,10 @@ $(OUTDIR)/./FileFormat/PLY/%.o: ./FileFormat/PLY/%.cpp ./FileFormat/PLY/%.h
 	$(MKDIR) $(OUTDIR)/./FileFormat/PLY
 	$(CPP) -c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) -o $@ $<
 
+$(OUTDIR)/./FileFormat/LAS/%.o: ./FileFormat/LAS/%.cpp ./FileFormat/LAS/%.h
+	$(MKDIR) $(OUTDIR)/./FileFormat/LAS
+	$(CPP) -c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) -o $@ $<
+
 $(OUTDIR)/./FileFormat/KVSML/%.o: ./FileFormat/KVSML/%.cpp ./FileFormat/KVSML/%.h
 	$(MKDIR) $(OUTDIR)/./FileFormat/KVSML
 	$(CPP) -c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) -o $@ $<
@@ -639,6 +644,8 @@ install::
 	$(INSTALL) ./FileFormat/JSON/*.h $(INSTALL_DIR)/include/Core/./FileFormat/JSON
 	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/KVSML
 	$(INSTALL) ./FileFormat/KVSML/*.h $(INSTALL_DIR)/include/Core/./FileFormat/KVSML
+	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/LAS
+	$(INSTALL) ./FileFormat/LAS/*.h $(INSTALL_DIR)/include/Core/./FileFormat/LAS
 	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/PLY
 	$(INSTALL) ./FileFormat/PLY/*.h $(INSTALL_DIR)/include/Core/./FileFormat/PLY
 	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/PNG

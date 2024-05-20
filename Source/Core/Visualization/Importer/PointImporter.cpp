@@ -57,6 +57,27 @@ PointImporter::PointImporter( const std::string& filename )
         this->import( file_format );
         delete file_format;
     }
+    else if ( kvs::PTS::CheckExtension( filename ) )
+    {
+        kvs::PTS* file_format = new kvs::PTS( filename );
+        if ( !file_format )
+        {
+            BaseClass::setSuccess( false );
+            kvsMessageError("Cannot read '%s'.",filename.c_str());
+            return;
+        }
+
+        if ( file_format->isFailure() )
+        {
+            BaseClass::setSuccess( false );
+            kvsMessageError("Cannot read '%s'.",filename.c_str());
+            delete file_format;
+            return;
+        }
+
+        this->import( file_format );
+        delete file_format;
+    }
     else
     {
         BaseClass::setSuccess( false );
@@ -109,6 +130,10 @@ PointImporter::SuperClass* PointImporter::exec( const kvs::FileFormatBase* file_
     {
         this->import( las );
     }
+    else if ( const kvs::PTS* pts = dynamic_cast<const kvs::PTS*>( file_format ) )
+    {
+        this->import( pts );
+    }
     else
     {
         BaseClass::setSuccess( false );
@@ -129,6 +154,19 @@ void kvs::PointImporter::import( const kvs::LAS* las )
 {
     SuperClass::setCoords( las->coords() );
     SuperClass::setColors( las->colors() );
+    SuperClass::updateMinMaxCoords();
+}
+
+/*==========================================================================*/
+/**
+ *  @brief  Imports the PTS format data.
+ *  @param  las [in] pointer to the PTS format file
+ */
+/*==========================================================================*/
+void kvs::PointImporter::import( const kvs::PTS* pts )
+{
+    SuperClass::setCoords( pts->coords() );
+    SuperClass::setColors( pts->colors() );
     SuperClass::updateMinMaxCoords();
 }
 

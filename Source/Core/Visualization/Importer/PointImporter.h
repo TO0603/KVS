@@ -10,6 +10,7 @@
 #include <kvs/PointObject>
 #include <kvs/KVSMLPointObject>
 #include <kvs/LAS>
+#include <kvs/PTS>
 
 
 namespace kvs
@@ -37,6 +38,7 @@ public:
 private:
     void import( const kvs::KVSMLPointObject* kvsml );
     void import( const kvs::LAS* las );
+    void import( const kvs::PTS* pts );
 };
 
 } // end of namespace kvs

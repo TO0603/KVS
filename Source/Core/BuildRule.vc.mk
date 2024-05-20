@@ -112,6 +112,7 @@ $(OUTDIR)\.\FileFormat\PNM\Header.obj \
 $(OUTDIR)\.\FileFormat\PNM\Pbm.obj \
 $(OUTDIR)\.\FileFormat\PNM\Pgm.obj \
 $(OUTDIR)\.\FileFormat\PNM\Ppm.obj \
+$(OUTDIR)\.\FileFormat\PTS\PTS.obj \
 $(OUTDIR)\.\FileFormat\STL\Stl.obj \
 $(OUTDIR)\.\FileFormat\TIFF\Entry.obj \
 $(OUTDIR)\.\FileFormat\TIFF\Header.obj \
@@ -582,6 +583,12 @@ $<
 $<
 <<
 
+{.\FileFormat\PTS\}.cpp{$(OUTDIR)\.\FileFormat\PTS\}.obj::
+	IF NOT EXIST $(OUTDIR)\.\FileFormat\PTS $(MKDIR) $(OUTDIR)\.\FileFormat\PTS
+	$(CPP) /c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) /Fo$(OUTDIR)\.\FileFormat\PTS\ @<<
+$<
+<<
+
 {.\FileFormat\PNM\}.cpp{$(OUTDIR)\.\FileFormat\PNM\}.obj::
 	IF NOT EXIST $(OUTDIR)\.\FileFormat\PNM $(MKDIR) $(OUTDIR)\.\FileFormat\PNM
 	$(CPP) /c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) /Fo$(OUTDIR)\.\FileFormat\PNM\ @<<
@@ -738,6 +745,8 @@ install::
 	$(INSTALL) .\FileFormat\PNG\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\PNG
 	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\PNM $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\PNM
 	$(INSTALL) .\FileFormat\PNM\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\PNM
+	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\PTS $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\PTS
+	$(INSTALL) .\FileFormat\PTS\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\PTS
 	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\STL $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\STL
 	$(INSTALL) .\FileFormat\STL\*.h $(INSTALL_DIR)\include\Core\.\FileFormat\STL
 	IF NOT EXIST $(INSTALL_DIR)\include\Core\.\FileFormat\TIFF $(MKDIR) $(INSTALL_DIR)\include\Core\.\FileFormat\TIFF

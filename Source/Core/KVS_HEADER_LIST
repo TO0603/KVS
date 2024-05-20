@@ -29,6 +29,7 @@ FileFormat/PNG/Png
 FileFormat/PNM/Pbm
 FileFormat/PNM/Pgm
 FileFormat/PNM/Ppm
+FileFormat/PTS/PTS
 FileFormat/STL/Stl
 FileFormat/TIFF/Tiff
 FileFormat/XML/XMLComment

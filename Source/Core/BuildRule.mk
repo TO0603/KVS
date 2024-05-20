@@ -112,6 +112,7 @@ $(OUTDIR)/./FileFormat/PNM/Header.o \
 $(OUTDIR)/./FileFormat/PNM/Pbm.o \
 $(OUTDIR)/./FileFormat/PNM/Pgm.o \
 $(OUTDIR)/./FileFormat/PNM/Ppm.o \
+$(OUTDIR)/./FileFormat/PTS/PTS.o \
 $(OUTDIR)/./FileFormat/STL/Stl.o \
 $(OUTDIR)/./FileFormat/TIFF/Entry.o \
 $(OUTDIR)/./FileFormat/TIFF/Header.o \
@@ -534,6 +535,10 @@ $(OUTDIR)/./FileFormat/STL/%.o: ./FileFormat/STL/%.cpp ./FileFormat/STL/%.h
 	$(MKDIR) $(OUTDIR)/./FileFormat/STL
 	$(CPP) -c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) -o $@ $<
 
+$(OUTDIR)/./FileFormat/PTS/%.o: ./FileFormat/PTS/%.cpp ./FileFormat/PTS/%.h
+	$(MKDIR) $(OUTDIR)/./FileFormat/PTS
+	$(CPP) -c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) -o $@ $<
+
 $(OUTDIR)/./FileFormat/PNM/%.o: ./FileFormat/PNM/%.cpp ./FileFormat/PNM/%.h
 	$(MKDIR) $(OUTDIR)/./FileFormat/PNM
 	$(CPP) -c $(CPPFLAGS) $(DEFINITIONS) $(INCLUDE_PATH) -o $@ $<
@@ -652,6 +657,8 @@ install::
 	$(INSTALL) ./FileFormat/PNG/*.h $(INSTALL_DIR)/include/Core/./FileFormat/PNG
 	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/PNM
 	$(INSTALL) ./FileFormat/PNM/*.h $(INSTALL_DIR)/include/Core/./FileFormat/PNM
+	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/PTS
+	$(INSTALL) ./FileFormat/PTS/*.h $(INSTALL_DIR)/include/Core/./FileFormat/PTS
 	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/STL
 	$(INSTALL) ./FileFormat/STL/*.h $(INSTALL_DIR)/include/Core/./FileFormat/STL
 	$(MKDIR) $(INSTALL_DIR)/include/Core/./FileFormat/TIFF

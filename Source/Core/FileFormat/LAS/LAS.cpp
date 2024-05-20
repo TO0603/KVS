@@ -171,6 +171,8 @@ bool LAS::read( const std::string& filename )
     m_coords = kvs::ValueArray<kvs::Real32>( coords );
     m_colors = kvs::ValueArray<UInt8>( colors );
 
+    delete [] PDR_buffer;
+    file.close();
     return true;
 }
 

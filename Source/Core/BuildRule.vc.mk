@@ -341,6 +341,7 @@ $(OUTDIR)\.\Visualization\Object\PolygonObject.obj \
 $(OUTDIR)\.\Visualization\Object\StructuredVolumeObject.obj \
 $(OUTDIR)\.\Visualization\Object\StructuredVolumeObjectList.obj \
 $(OUTDIR)\.\Visualization\Object\TableObject.obj \
+$(OUTDIR)\.\Visualization\Object\TexturedPolygonObject.obj \
 $(OUTDIR)\.\Visualization\Object\UnstructuredVolumeObject.obj \
 $(OUTDIR)\.\Visualization\Object\VolumeObjectBase.obj \
 $(OUTDIR)\.\Visualization\Pipeline\ObjectImporter.obj \
@@ -392,6 +393,7 @@ $(OUTDIR)\.\Visualization\Renderer\StochasticRendererBase.obj \
 $(OUTDIR)\.\Visualization\Renderer\StochasticRenderingCompositor.obj \
 $(OUTDIR)\.\Visualization\Renderer\StochasticRenderingEngine.obj \
 $(OUTDIR)\.\Visualization\Renderer\StochasticTetrahedraRenderer.obj \
+$(OUTDIR)\.\Visualization\Renderer\StochasticTexturedPolygonRenderer.obj \
 $(OUTDIR)\.\Visualization\Renderer\StochasticUniformGridRenderer.obj \
 $(OUTDIR)\.\Visualization\Renderer\StylizedLineRenderer.obj \
 $(OUTDIR)\.\Visualization\Renderer\ValueAxis.obj \

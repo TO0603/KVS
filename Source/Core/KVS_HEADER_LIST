@@ -322,6 +322,7 @@ Visualization/Object/PolygonObject
 Visualization/Object/StructuredVolumeObject
 Visualization/Object/StructuredVolumeObjectList
 Visualization/Object/TableObject
+Visualization/Object/TexturedPolygonObject
 Visualization/Object/UnstructuredVolumeObject
 Visualization/Object/VolumeObjectBase
 Visualization/Pipeline/ObjectImporter
@@ -369,6 +370,7 @@ Visualization/Renderer/StochasticRendererBase
 Visualization/Renderer/StochasticRenderingCompositor
 Visualization/Renderer/StochasticRenderingEngine
 Visualization/Renderer/StochasticTetrahedraRenderer
+Visualization/Renderer/StochasticTexturedPolygonRenderer
 Visualization/Renderer/StochasticUniformGridRenderer
 Visualization/Renderer/StylizedLineRenderer
 Visualization/Renderer/ValueAxis

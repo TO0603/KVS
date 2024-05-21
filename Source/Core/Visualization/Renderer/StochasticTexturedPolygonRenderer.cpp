@@ -356,9 +356,6 @@ kvs::ValueArray<kvs::Real32> VertexTexture2DCoords(
 namespace kvs
 {
 
-namespace mod
-{
-
 /*===========================================================================*/
 /**
  *  @brief  Constructs a new StochasticPolygonRenderer class.
@@ -916,7 +913,5 @@ void StochasticTexturedPolygonRenderer::Engine::create_buffer_object( const kvs:
 
     m_vbo.unbind();
 }
-
-} // end of namespace mod
 
 } // end of namespace kvs

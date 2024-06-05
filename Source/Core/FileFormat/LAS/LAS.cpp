@@ -1,4 +1,5 @@
 #include "LAS.h"
+#include <cstring>
 #include <kvs/IgnoreUnusedVariable>
 #include <kvs/File>
 #include <kvs/Assert>

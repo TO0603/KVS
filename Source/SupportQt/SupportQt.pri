@@ -33,7 +33,11 @@ win32 {
 #=============================================================================
 CONFIG += warn_off opengl staticlib
 win32 {
-CONFIG += static_runtime
+    CONFIG += static_runtime
+    Release:QMAKE_CXXFLAGS_RELEASE += /MT
+    Release:QMAKE_LFLAGS_RELEASE += /MT
+    Debug:QMAKE_CXXFLAGS_DEBUG += /MTd
+    Debug:QMAKE_LFLAGS_DEBUG += /MTd
 }
 QT     += opengl
 

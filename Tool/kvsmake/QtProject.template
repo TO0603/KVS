@@ -57,8 +57,11 @@ QT += openglwidgets
 }
 
 win32 {
+    CONFIG += static_runtime
     QMAKE_CFLAGS_RELEASE += /MT
     QMAKE_CXXFLAGS_RELEASE += /MT
+    QMAKE_CXXFLAGS_DEBUG += /MTd
+    QMAKE_LFLAGS_DEBUG += /MTd
 }
 
 equals( KVS_SUPPORT_PYTHON, "1" ) { CONFIG += no_keywords }

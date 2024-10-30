@@ -830,7 +830,7 @@ bool OpenXRDevice::beginFrame()
                 if ( XR_SUCCEEDED( ret ) )
                 {
                     bool last = m_controller_status.button_status[i][kvs::Controller::Trigger].last;
-                    bool current = floatState.currentState > OPENXR_CONTROLLER_THRESHOLD;
+                    bool current = floatState.currentState == 1.0f;
                     m_controller_status.button_status[i][kvs::Controller::Trigger].pressed = !last && current;
                     m_controller_status.button_status[i][kvs::Controller::Trigger].pressing = last && current;
                     m_controller_status.button_status[i][kvs::Controller::Trigger].released = last && !current;

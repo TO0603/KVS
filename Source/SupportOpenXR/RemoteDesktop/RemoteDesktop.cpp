@@ -163,7 +163,11 @@ void RemoteDesktop::update( const kvs::Xform& controller_xform,
 		ClientToScreen( hwnd, &pos );
 		SetCursorPos( pos.x, pos.y );
 
-		if ( pressing && !m_vk_pressing )
+		if ( pressed )
+		{
+			clickedMouseLeft();
+		}
+		else if ( pressing && !m_vk_pressing )
 		{
 			m_vk_pressing = true;
 			pressMouseLeft();
@@ -536,6 +540,28 @@ void RemoteDesktop::grabDesktopImage()
 	GetObject( m_hbitmap, sizeof( BITMAP ), &bmp );
 	m_rdp_image = static_cast<kvs::UInt8*>( bmp.bmBits );
 	m_rdp_texture.create( m_screen_size[0], m_screen_size[1], m_rdp_image );
+}
+
+/*===========================================================================*/
+/**
+ *  @brief Click mouse left function.
+ */
+ /*===========================================================================*/
+void RemoteDesktop::clickedMouseLeft()
+{
+	std::thread t([]() {
+		POINT mouse_pos;
+		GetCursorPos( &mouse_pos );
+		INPUT input = { 0 };
+		input.type = INPUT_MOUSE;
+		input.mi.dx = mouse_pos.x * 65535 / GetSystemMetrics( SM_CXVIRTUALSCREEN );
+		input.mi.dy = mouse_pos.y * 65535 / GetSystemMetrics( SM_CYVIRTUALSCREEN );
+		input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+		SendInput( 1, &input, sizeof( INPUT ) );
+		input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+		SendInput( 1, &input, sizeof( INPUT ) );
+		});
+	t.detach();
 }
 
 /*===========================================================================*/

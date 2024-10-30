@@ -66,6 +66,7 @@ public:
     void render();
 
 private:
+    void clickedMouseLeft();
     void pressMouseLeft();
     void releaseMouseLeft();
     void pressedKey( kvs::Int32 key, bool shift );

@@ -25,6 +25,9 @@ namespace kvs { using Screen = kvs::glfw::Screen; }
 #include <kvs/qt/Screen>
 namespace kvs { using Screen = kvs::qt::Screen; }
 
+#elif defined( KBS_SUPPORT_OPENXR ) && defined( KVS_APP_USE_OPENXR )
+namespace kvs { using Screen = kvs::openxr::Screen; }
+
 #else
 
 #if defined( KVS_SUPPORT_GLFW )
@@ -34,6 +37,10 @@ namespace kvs { using Screen = kvs::glfw::Screen; }
 #elif defined( KVS_SUPPORT_GLUT )
 #include <kvs/glut/Screen>
 namespace kvs { using Screen = kvs::glut::Screen; }
+
+#elif defined( KVS_SUPPORT_OPENXR )
+#include <kvs/openxr/Screen>
+namespace kvs { using Screen = kvs::openxr::Screen; }
 
 #elif defined( KVS_SUPPORT_QT )
 #include <kvs/qt/Screen>

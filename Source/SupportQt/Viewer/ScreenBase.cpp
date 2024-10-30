@@ -13,61 +13,12 @@
 #include <kvs/EventListener>
 #include <kvs/qt/Qt>
 #include <kvs/qt/Application>
+#include <SupportQt/Event/EventTimer.h>
 #include <SupportQt/Viewer/KVSMouseButton.h>
 #include <SupportQt/Viewer/KVSKey.h>
 #include <kvs/OpenGL>
 #include <kvs/Version>
 #include <kvs/FrameBufferObject>
-
-
-namespace
-{
-
-class EventTimer : public QObject, public kvs::EventTimer
-{
-public:
-    EventTimer( kvs::EventListener* listener ): kvs::EventTimer( listener ) {}
-    virtual ~EventTimer() {}
-    void start( int msec );
-    void stop();
-    void nortify();
-
-private:
-    void timerEvent( QTimerEvent* e ) { this->nortify(); }
-};
-
-void EventTimer::start( int msec )
-{
-    if ( msec < 0 ) { return; }
-    if ( this->isStopped() )
-    {
-        this->setInterval( msec );
-        this->setStopped( false );
-        this->setID( QObject::startTimer( msec ) );
-    }
-}
-
-void EventTimer::stop()
-{
-    if ( !this->isStopped() )
-    {
-        this->setStopped( true );
-        QObject::killTimer( this->id() );
-    }
-}
-
-void EventTimer::nortify()
-{
-    if ( !this->isStopped() )
-    {
-        if ( this->eventListener() )
-        {
-            this->eventListener()->onEvent( this->timeEvent() );
-        }
-    }
-}
-
-}
 
 namespace kvs
 {
@@ -133,7 +84,7 @@ void ScreenBase::setEvent( kvs::EventListener* event, const std::string& name )
 {
     if ( event->eventType() & kvs::EventBase::TimerEvent )
     {
-        event->setEventTimer( new ::EventTimer( event ) );
+        event->setEventTimer( new kvs::qt::EventTimer( event ) );
     }
     BaseClass::setEvent( event, name );
 }
@@ -142,7 +93,7 @@ void ScreenBase::addEvent( kvs::EventListener* event, const std::string& name )
 {
     if ( event->eventType() & kvs::EventBase::TimerEvent )
     {
-        event->setEventTimer( new ::EventTimer( event ) );
+        event->setEventTimer( new kvs::qt::EventTimer( event ) );
     }
     BaseClass::addEvent( event, name );
 }

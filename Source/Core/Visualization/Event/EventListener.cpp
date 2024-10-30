@@ -95,6 +95,30 @@ void EventListener::onEvent( kvs::EventBase* event )
         this->timerEvent( e );
         break;
     }
+    case kvs::EventBase::ControllerPressEvent:
+    {
+        auto* e = static_cast<kvs::ControllerEvent*>(event);
+        this->controllerPressEvent(e);
+        break;
+    }
+    case kvs::EventBase::ControllerReleaseEvent:
+    {
+        auto* e = static_cast<kvs::ControllerEvent*>(event);
+        this->controllerReleaseEvent(e);
+        break;
+    }
+    case kvs::EventBase::ControllerMoveEvent:
+    {
+        auto* e = static_cast<kvs::ControllerEvent*>(event);
+        this->controllerMoveEvent(e);
+        break;
+    }
+    case kvs::EventBase::ControllerAxisEvent:
+    {
+        auto* e = static_cast<kvs::ControllerEvent*>(event);
+        this->controllerAxisEvent(e);
+        break;
+    }
     default: break;
     }
 }

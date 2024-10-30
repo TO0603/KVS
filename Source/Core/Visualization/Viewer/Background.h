@@ -33,7 +33,7 @@ private:
     Type m_type = MonoColor; ///< background type
     bool m_image_changed = false; ///< flag for changing background image
     kvs::RGBColor m_color[4]; ///< color on the corners
-    kvs::Real32 m_opacity = 0.0f; ///< opacity
+    kvs::Real32 m_opacity = 1.0f; ///< opacity
     kvs::ColorImage m_image{}; ///< background image
     kvs::Texture2D m_texture{}; ///< background image texture
 

@@ -202,6 +202,7 @@ Utility/Version
 Utility/WeakPointer
 Visualization/Data/HydrogenVolumeData
 Visualization/Data/TornadoVolumeData
+Visualization/Event/ControllerEvent
 Visualization/Event/EventBase
 Visualization/Event/EventHandler
 Visualization/Event/EventListener
@@ -380,6 +381,7 @@ Visualization/Viewer/Application
 Visualization/Viewer/ApplicationBase
 Visualization/Viewer/Background
 Visualization/Viewer/Camera
+Visualization/Viewer/Controller
 Visualization/Viewer/Coordinate
 Visualization/Viewer/DisplayFormat
 Visualization/Viewer/FontMetrics
@@ -397,6 +399,7 @@ Visualization/Viewer/RendererManager
 Visualization/Viewer/Scene
 Visualization/Viewer/Screen
 Visualization/Viewer/ScreenBase
+Visualization/Viewer/Side
 Visualization/Viewer/Trackball
 Visualization/Viewer/UIColor
 Visualization/Viewer/Xform

@@ -47,6 +47,7 @@ private:
     kvs::Vec3 m_light_position{}; ///< light position used for LOD control
     kvs::Vec3 m_camera_position{}; ///< camera position used for LOD control
     kvs::EnsembleAverageBuffer m_ensemble_buffer{}; ///< ensemble averaging buffer
+    kvs::UInt32 m_num_objects = 0;
 
 public:
     StochasticRenderingCompositor() = delete;

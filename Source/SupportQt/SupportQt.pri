@@ -88,5 +88,6 @@ INSTALLS += target INSTALL_HEADERS
 #=============================================================================
 #  header and source
 #=============================================================================
+include(Event/Event.pri)
 include(Viewer/Viewer.pri)
 include(Widget/Widget.pri)

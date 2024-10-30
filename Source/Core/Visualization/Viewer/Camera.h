@@ -41,6 +41,7 @@ private:
     float m_right = 5.0f; ///< right plane position
     float m_bottom = -5.0f; ///< bottom plane position
     float m_top = 5.0f; ///< top plane position
+    kvs::Mat4 m_projection_matrix = kvs::Mat4::Identity();
     size_t m_window_width = 512; ///< window width
     size_t m_window_height = 512; ///< window height
 
@@ -48,17 +49,18 @@ public:
     Camera();
     virtual ~Camera() = default;
 
-    void setProjectionType( const ProjectionType type ) { m_projection_type = type; }
+    void setProjectionType( const ProjectionType type );
     void setProjectionTypeToPerspective() { this->setProjectionType( Perspective ); }
     void setProjectionTypeToOrthogonal() { this->setProjectionType( Orthogonal ); }
     void setProjectionTypeToFrustum() { this->setProjectionType( Frustum ); }
-    void setFieldOfView( const float fov ) { m_field_of_view = fov; }
-    void setBack( const float back ) { m_back = back; }
-    void setFront( const float front ) { m_front = front; }
-    void setLeft( const float left ) { m_left = left; }
-    void setRight( const float right ) { m_right = right; }
-    void setBottom( const float bottom ) { m_bottom = bottom; }
-    void setTop( const float top ) { m_top = top; }
+    void setFieldOfView( const float fov );
+    void setBack( const float back );
+    void setFront( const float front );
+    void setLeft( const float left );
+    void setRight( const float right );
+    void setBottom( const float bottom );
+    void setTop( const float top );
+    void setProjectionMatrix( const kvs::Mat4& projection_matrix );
     void setWindowSize( const size_t width, const size_t height );
     void setPosition( const kvs::Vec3& position );
     void setPosition( const kvs::Vec3& position, const kvs::Vec3& look_at );
@@ -94,6 +96,9 @@ public:
     void scale( const kvs::Vec3& scaling );
 
     KVS_DEPRECATED( virtual void initialize() ) { *this = Camera(); }
+
+private:
+    void computeProjectionMatrix();
 };
 
 } // end of namespace kvs

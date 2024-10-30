@@ -36,7 +36,6 @@ void StochasticRenderingCompositor::draw()
         m_scene->updateGLProjectionMatrix();
         m_scene->updateGLViewingMatrix();
         m_scene->updateGLLightParameters();
-        m_scene->background()->apply();
 
         if ( m_scene->objectManager()->hasObject() )
         {
@@ -62,6 +61,43 @@ void StochasticRenderingCompositor::render_objects()
     // Check for window/object state changes
     if ( this->is_window_created() ) { this->onWindowCreated(); }
     if ( this->is_window_resized() ) { this->onWindowResized(); }
+
+    kvs::UInt32 past_num_objects = m_num_objects;
+    m_num_objects = 0;
+    this->for_each_object( [&] ( Object* object, Renderer* renderer )
+    {
+       ++m_num_objects;
+    } );
+
+    if ( past_num_objects != m_num_objects )
+    {
+        m_ensemble_buffer.release();
+        const size_t width = m_scene->camera()->windowWidth();
+        const size_t height = m_scene->camera()->windowHeight();
+        m_window_width = width;
+        m_window_height = height;
+        const float dpr = m_scene->camera()->devicePixelRatio();
+        const size_t framebuffer_width = static_cast<size_t>( width * dpr );
+        const size_t framebuffer_height = static_cast<size_t>( height * dpr );
+        m_ensemble_buffer.create( framebuffer_width, framebuffer_height );
+        m_ensemble_buffer.clear();
+
+        this->for_each_object([&]( Object* object, Renderer* renderer )
+        {
+            auto& engine = renderer->engine();
+            if (engine.object()) engine.release();
+            engine.setDepthTexture( m_ensemble_buffer.currentDepthTexture() );
+            engine.setShader( &renderer->shader() );
+            engine.setRepetitionLevel( m_repetition_level );
+            engine.setShadingEnabled( renderer->isShadingEnabled() );
+    
+            kvs::OpenGL::PushMatrix();
+            m_scene->updateGLModelingMatrix( object );
+            engine.create( object, m_scene->camera(), m_scene->light() );
+            kvs::OpenGL::PopMatrix();
+        });
+    }
+
     this->for_each_object( [&] ( Object* object, Renderer* renderer )
     {
         if ( this->is_object_changed( object, renderer ) )

@@ -220,6 +220,11 @@ void ParticleBasedRenderer::setDisplayPointSize( float display_point_size )
     static_cast<Engine&>( engine() ).setDisplayPointSize( display_point_size );
 }
 
+void ParticleBasedRenderer::setObjectDepth( float object_depth )
+{
+    static_cast<Engine&>( engine() ).setObjectDepth( object_depth );
+}
+  
 void ParticleBasedRenderer::Engine::BufferObject::create(
     const kvs::ObjectBase* object,
     const size_t nmanagers )
@@ -446,7 +451,7 @@ void ParticleBasedRenderer::Engine::create(
 
     const kvs::Vec4 I( point->objectCenter(), 1.0f );
     const kvs::Vec4 O = m_initial_projection * m_initial_modelview * I;
-    m_initial_object_depth = O.z();
+    m_initial_object_depth = O.z() * m_object_depth;
 }
 
 /*===========================================================================*/

@@ -55,7 +55,7 @@ public:
     void setFragmentShaderFile( const std::string& file );
     void setShaderFiles( const std::string& vert_file, const std::string& frag_file );
     void setDisplayPointSize( float display_point_size );
-    void setObjectDepth( float display_point_size );
+    void setObjectDepth( float object_depth );
 public:
     // Deprecated method
     KVS_DEPRECATED( bool isEnabledShuffle() const ) { return this->isShuffleEnabled(); }

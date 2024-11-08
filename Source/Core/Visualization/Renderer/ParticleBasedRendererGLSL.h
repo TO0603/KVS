@@ -56,6 +56,7 @@ public:
     void setShaderFiles( const std::string& vert_file, const std::string& frag_file );
     void setDisplayPointSize( float display_point_size );
     void setObjectDepth( float object_depth );
+    void setTranslationOffset( kvs::Vec3 translate_offset );
 public:
     // Deprecated method
     KVS_DEPRECATED( bool isEnabledShuffle() const ) { return this->isShuffleEnabled(); }
@@ -143,6 +144,7 @@ private:
     float m_initial_object_depth = 0.0f; ///< initial object depth
     float m_display_point_size = 1.0f; ///< display point size
     float m_object_depth = 1.0f; ///< object depth
+    kvs::Vec3 m_translate_offset; /// translate_offset(camera)
 
     BufferObject m_buffer_object; ///< buffer object
     RenderPass m_render_pass; ///< render pass
@@ -182,6 +184,7 @@ public:
     }
     void setDisplayPointSize( float display_point_size ) { m_display_point_size = display_point_size; }
     void setObjectDepth( float object_depth ) { m_object_depth = object_depth; }
+    void setTranslationOffset( kvs::Vec3 translate_offset ) { m_translate_offset = translate_offset; }
 
 private:
     void create_shader_program();

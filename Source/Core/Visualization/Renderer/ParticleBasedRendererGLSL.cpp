@@ -224,7 +224,12 @@ void ParticleBasedRenderer::setObjectDepth( float object_depth )
 {
     static_cast<Engine&>( engine() ).setObjectDepth( object_depth );
 }
-  
+
+void ParticleBasedRenderer::setTranslationOffset( kvs::Vec3 translate_offset )
+{
+    static_cast<Engine&>( engine() ).setTranslationOffset( translate_offset );
+}
+
 void ParticleBasedRenderer::Engine::BufferObject::create(
     const kvs::ObjectBase* object,
     const size_t nmanagers )
@@ -433,6 +438,7 @@ void ParticleBasedRenderer::Engine::create(
     if ( kvs::Math::IsZero( m_initial_modelview[3][3] ) )
     {
         m_initial_modelview = kvs::OpenGL::ModelViewMatrix();
+        m_initial_modelview[2][3] += m_translate_offset.z();
     }
 
     if ( kvs::Math::IsZero( m_initial_projection[3][3] ) )

@@ -303,6 +303,8 @@ void Screen::initializeEvent()
 /*===========================================================================*/
 void Screen::paintEvent()
 {
+    if (m_scene) m_scene->background()->apply();
+
     kvs::OpenGL::WithPushedMatrix p( GL_MODELVIEW );
     p.loadIdentity();
 

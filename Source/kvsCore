@@ -202,6 +202,7 @@
 #include <Core/Utility/WeakPointer.h>
 #include <Core/Visualization/Data/HydrogenVolumeData.h>
 #include <Core/Visualization/Data/TornadoVolumeData.h>
+#include <Core/Visualization/Event/ControllerEvent.h>
 #include <Core/Visualization/Event/EventBase.h>
 #include <Core/Visualization/Event/EventHandler.h>
 #include <Core/Visualization/Event/EventListener.h>
@@ -380,6 +381,7 @@
 #include <Core/Visualization/Viewer/ApplicationBase.h>
 #include <Core/Visualization/Viewer/Background.h>
 #include <Core/Visualization/Viewer/Camera.h>
+#include <Core/Visualization/Viewer/Controller.h>
 #include <Core/Visualization/Viewer/Coordinate.h>
 #include <Core/Visualization/Viewer/DisplayFormat.h>
 #include <Core/Visualization/Viewer/FontMetrics.h>
@@ -397,6 +399,7 @@
 #include <Core/Visualization/Viewer/Scene.h>
 #include <Core/Visualization/Viewer/Screen.h>
 #include <Core/Visualization/Viewer/ScreenBase.h>
+#include <Core/Visualization/Viewer/Side.h>
 #include <Core/Visualization/Viewer/Trackball.h>
 #include <Core/Visualization/Viewer/UIColor.h>
 #include <Core/Visualization/Viewer/Xform.h>

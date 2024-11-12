@@ -223,6 +223,20 @@ const kvs::Vec3 Light::position() const
 /*==========================================================================*/
 void Light::update( const kvs::Camera* camera )
 {
+#if 1
+
+    const kvs::Vec4 position( this->position(), 1.0f);
+    const kvs::Vec4 diffuse( this->diffuse(), 1.0f );
+    const kvs::Vec4 ambient( this->ambient(), 1.0f );
+    const kvs::Vec4 specular( this->specular(), 1.0f );
+    
+    kvs::OpenGL::SetLight( m_id, GL_POSITION, ( GLfloat* )&( position[0] ) );
+    kvs::OpenGL::SetLight( m_id, GL_DIFFUSE,  ( GLfloat* )&( diffuse[0] ) );
+    kvs::OpenGL::SetLight( m_id, GL_AMBIENT,  ( GLfloat* )&( ambient[0] ) );
+    kvs::OpenGL::SetLight( m_id, GL_SPECULAR, ( GLfloat* )&( specular[0] ) );
+
+#else
+
     // World coordinate to camera coordinate.
     const kvs::Vec3 p = kvs::WorldCoordinate( this->position() ).toCameraCoordinate( camera ).position();
 
@@ -233,11 +247,13 @@ void Light::update( const kvs::Camera* camera )
 
     kvs::OpenGL::PushMatrix();
     kvs::OpenGL::LoadIdentity();
-    kvs::OpenGL::SetLight( m_id, GL_POSITION, (GLfloat*)&(position[0]) );
-    kvs::OpenGL::SetLight( m_id, GL_DIFFUSE,  (GLfloat*)&(diffuse[0]) );
-    kvs::OpenGL::SetLight( m_id, GL_AMBIENT,  (GLfloat*)&(ambient[0]) );
-    kvs::OpenGL::SetLight( m_id, GL_SPECULAR, (GLfloat*)&(specular[0]) );
+    kvs::OpenGL::SetLight( m_id, GL_POSITION, ( GLfloat* )&( position[0] ) );
+    kvs::OpenGL::SetLight( m_id, GL_DIFFUSE, ( GLfloat* )&( diffuse[0] ) );
+    kvs::OpenGL::SetLight( m_id, GL_AMBIENT, ( GLfloat* )&( ambient[0] ) );
+    kvs::OpenGL::SetLight( m_id, GL_SPECULAR, ( GLfloat* )&( specular[0] ) );
     kvs::OpenGL::PopMatrix();
+
+#endif
 }
 
 /*==========================================================================*/

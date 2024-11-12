@@ -617,19 +617,35 @@ void Scene::updateGLProjectionMatrix() const
 /*===========================================================================*/
 void Scene::updateGLLightParameters() const
 {
+#if 1
+
+    const kvs::Vec4 position( m_light->position(), 1.0f );
+    const kvs::Vec4 diffuse( m_light->diffuse(), 1.0f );
+    const kvs::Vec4 ambient( m_light->ambient(), 1.0f );
+    const kvs::Vec4 specular( m_light->specular(), 1.0f );
+
+    kvs::OpenGL::SetLight( m_light->id(), GL_POSITION, ( GLfloat* )&( position[0] ) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_DIFFUSE, ( GLfloat* )&( diffuse[0] ) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_AMBIENT, ( GLfloat* )&( ambient[0] ) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_SPECULAR, ( GLfloat* )&( specular[0] ) );
+
+#else
+
     const kvs::Vec3 p = ::World2Camera( m_light->position(), m_camera );
     const kvs::Vec4 position( p, 1.0f );
     const kvs::Vec4 diffuse( m_light->diffuse(), 1.0f );
     const kvs::Vec4 ambient( m_light->ambient(), 1.0f );
     const kvs::Vec4 specular( m_light->specular(), 1.0f );
-
+    
     kvs::OpenGL::PushMatrix();
     kvs::OpenGL::LoadIdentity();
-    kvs::OpenGL::SetLight( m_light->id(), GL_POSITION, (GLfloat*)&(position[0]) );
-    kvs::OpenGL::SetLight( m_light->id(), GL_DIFFUSE,  (GLfloat*)&(diffuse[0]) );
-    kvs::OpenGL::SetLight( m_light->id(), GL_AMBIENT,  (GLfloat*)&(ambient[0]) );
-    kvs::OpenGL::SetLight( m_light->id(), GL_SPECULAR, (GLfloat*)&(specular[0]) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_POSITION, ( GLfloat* )&( position[0] ) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_DIFFUSE, ( GLfloat* )&( diffuse[0] ) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_AMBIENT, ( GLfloat* )&( ambient[0] ) );
+    kvs::OpenGL::SetLight( m_light->id(), GL_SPECULAR, ( GLfloat* )&( specular[0] ) );
     kvs::OpenGL::PopMatrix();
+
+#endif
 }
 
 /*===========================================================================*/

@@ -41,6 +41,10 @@ SUBDIRS = $(SUBDIRS) SupportFFmpeg
 SUBDIRS = $(SUBDIRS) SupportQt
 !ENDIF
 
+!IF "$(KVS_SUPPORT_OPENXR)" == "1"
+SUBDIRS = $(SUBDIRS) SupportOpenXR
+!ENDIF
+
 !IF "$(KVS_SUPPORT_SAGE)" == "1"
 SUBDIRS = $(SUBDIRS) SupportSAGE
 !ENDIF
@@ -112,6 +116,11 @@ install:
 	IF NOT EXIST "$(INSTALL_DIR)\include\kvs\qt" $(MKDIR) "$(INSTALL_DIR)\include\kvs\qt"
 	$(INSTALL) kvsSupportQt "$(INSTALL_DIR)\include"
 	$(INSTALL) kvs\qt\* "$(INSTALL_DIR)\include\kvs\qt"
+!ENDIF
+!IF "$(KVS_SUPPORT_OPENXR)" == "1"
+	IF NOT EXIST "$(INSTALL_DIR)\include\kvs\openxr" $(MKDIR) "$(INSTALL_DIR)\include\kvs\openxr"
+	$(INSTALL) kvsSupportOpenXR "$(INSTALL_DIR)\include"
+	$(INSTALL) kvs\openxr\* "$(INSTALL_DIR)\include\kvs\openxr"
 !ENDIF
 !IF "$(KVS_SUPPORT_OPENCV)" == "1"
 	IF NOT EXIST "$(INSTALL_DIR)\include\kvs\opencv" $(MKDIR) "$(INSTALL_DIR)\include\kvs\opencv"

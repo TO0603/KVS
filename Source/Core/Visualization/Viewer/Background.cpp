@@ -158,7 +158,6 @@ void Background::apply()
     case Background::Image: this->apply_image(); break;
     default: break;
     }
-    kvs::OpenGL::Flush();
 }
 
 /*==========================================================================*/

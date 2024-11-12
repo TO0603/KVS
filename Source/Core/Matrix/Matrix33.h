@@ -57,6 +57,8 @@ public:
         const Vector3<T>& v1,
         const Vector3<T>& v2 );
     explicit Matrix33( const T elements[9] );
+    
+    Matrix33( const T qx, const T qy, const T qz, const T qw);
 
     template <
         typename T00, typename T01, typename T02,
@@ -325,6 +327,45 @@ inline Matrix33<T>::Matrix33(
     const Vector3<T>& v2 ):
     m_data{ v0, v1, v2 }
 {
+}
+
+/*==========================================================================*/
+/**
+ *  @brief  Constructs a new Matrix33.
+ *  @param  qx [in] quaternion x.
+ *  @param  qy [in] quaternion y.
+ *  @param  qz [in] quaternion z.
+ *  @param  qw [in] quaternion w.
+ */
+/*==========================================================================*/
+template<typename T>
+inline Matrix33<T>::Matrix33(
+    const T qx,
+    const T qy,
+    const T qz,
+    const T qw )
+{
+    T qxx( qx * qx );
+    T qyy( qy * qy );
+    T qzz( qz * qz );
+    T qxz( qx * qz );
+    T qxy( qx * qy );
+    T qyz( qy * qz );
+    T qwx( qw * qx );
+    T qwy( qw * qy );
+    T qwz( qw * qz );
+
+    m_data[0][0] = T( 1 ) - T( 2 ) * ( qyy + qzz );
+    m_data[1][0] = T( 2 ) * ( qxy + qwz );
+    m_data[2][0] = T( 2 ) * ( qxz - qwy );
+ 
+    m_data[0][1] = T( 2 ) * ( qxy - qwz );
+    m_data[1][1] = T( 1 ) - T( 2 ) * ( qxx + qzz );
+    m_data[2][1] = T( 2 ) * ( qyz + qwx );
+ 
+    m_data[0][2] = T( 2 ) * ( qxz + qwy );
+    m_data[1][2] = T( 2 ) * ( qyz - qwx );
+    m_data[2][2] = T( 1 ) - T( 2 ) * ( qxx + qyy );
 }
 
 /*==========================================================================*/

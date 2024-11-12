@@ -14,6 +14,7 @@
 #include <kvs/WheelEvent>
 #include <kvs/TimeEvent>
 #include <kvs/EventTimer>
+#include <kvs/ControllerEvent>
 
 
 namespace kvs
@@ -39,6 +40,10 @@ public:
     using KeyRepeatEventFunc = std::function<void(kvs::KeyEvent*)>;
     using KeyReleaseEventFunc = std::function<void(kvs::KeyEvent*)>;
     using TimerEventFunc = std::function<void(kvs::TimeEvent*)>;
+    using ControllerPressEventFunc = std::function<void(kvs::ControllerEvent*)>;
+    using ControllerReleaseEventFunc = std::function<void(kvs::ControllerEvent*)>;
+    using ControllerMoveEventFunc = std::function<void(kvs::ControllerEvent*)>;
+    using ControllerAxisEventFunc = std::function<void(kvs::ControllerEvent*)>;
 
 private:
     int m_event_type = kvs::EventBase::AllEvents; ///< event type
@@ -61,6 +66,10 @@ private:
     KeyRepeatEventFunc m_key_repeat_event = nullptr;
     KeyReleaseEventFunc m_key_release_event = nullptr;
     TimerEventFunc m_timer_event = nullptr;
+    ControllerPressEventFunc m_controller_press_event = nullptr;
+    ControllerReleaseEventFunc m_controller_release_event = nullptr;
+    ControllerMoveEventFunc m_controller_move_event = nullptr;
+    ControllerAxisEventFunc m_controller_axis_event = nullptr;
 
 public:
     EventListener() = default;
@@ -99,6 +108,10 @@ public:
     void keyRepeatEvent( KeyRepeatEventFunc func ) { m_key_repeat_event = func; }
     void keyReleaseEvent( KeyReleaseEventFunc func ) { m_key_release_event = func; }
     void timerEvent( TimerEventFunc func, int msec = -1 ) { m_timer_event = func; m_timer_interval = msec; }
+    void controllerPressEvent( ControllerPressEventFunc func ) { m_controller_press_event = func; }
+    void controllerReleaseEvent( ControllerReleaseEventFunc func ) { m_controller_release_event = func; }
+    void controllerMoveEvent ( ControllerMoveEventFunc func ) { m_controller_move_event = func; }
+    void controllerAxisEvent ( ControllerAxisEventFunc func ) { m_controller_axis_event = func; }
 
     virtual void onEvent( kvs::EventBase* event );
     virtual void initializeEvent() { if ( m_initialize_event ) m_initialize_event(); }
@@ -113,6 +126,10 @@ public:
     virtual void keyRepeatEvent( kvs::KeyEvent* e ) { if ( m_key_repeat_event ) m_key_repeat_event( e ); }
     virtual void keyReleaseEvent( kvs::KeyEvent* e ) { if ( m_key_release_event ) m_key_release_event( e ); }
     virtual void timerEvent( kvs::TimeEvent* e ) { if ( m_timer_event ) m_timer_event( e ); }
+    virtual void controllerPressEvent( kvs::ControllerEvent* e ) { if ( m_controller_press_event ) m_controller_press_event(e); }
+    virtual void controllerReleaseEvent( kvs::ControllerEvent* e ) { if ( m_controller_release_event ) m_controller_release_event(e); }
+    virtual void controllerMoveEvent( kvs::ControllerEvent* e ) { if ( m_controller_move_event ) m_controller_move_event(e); }
+    virtual void controllerAxisEvent( kvs::ControllerEvent* e ) { if ( m_controller_axis_event ) m_controller_axis_event(e); }
 };
 
 } // end of namespace kvs

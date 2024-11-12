@@ -220,6 +220,16 @@ void ParticleBasedRenderer::setDisplayPointSize( float display_point_size )
     static_cast<Engine&>( engine() ).setDisplayPointSize( display_point_size );
 }
 
+void ParticleBasedRenderer::setObjectDepth( float object_depth )
+{
+    static_cast<Engine&>( engine() ).setObjectDepth( object_depth );
+}
+
+void ParticleBasedRenderer::setTranslationOffset( kvs::Vec3 translate_offset )
+{
+    static_cast<Engine&>( engine() ).setTranslationOffset( translate_offset );
+}
+
 void ParticleBasedRenderer::Engine::BufferObject::create(
     const kvs::ObjectBase* object,
     const size_t nmanagers )
@@ -428,6 +438,7 @@ void ParticleBasedRenderer::Engine::create(
     if ( kvs::Math::IsZero( m_initial_modelview[3][3] ) )
     {
         m_initial_modelview = kvs::OpenGL::ModelViewMatrix();
+        m_initial_modelview[2][3] += m_translate_offset.z();
     }
 
     if ( kvs::Math::IsZero( m_initial_projection[3][3] ) )
@@ -446,7 +457,7 @@ void ParticleBasedRenderer::Engine::create(
 
     const kvs::Vec4 I( point->objectCenter(), 1.0f );
     const kvs::Vec4 O = m_initial_projection * m_initial_modelview * I;
-    m_initial_object_depth = O.z();
+    m_initial_object_depth = O.z() * m_object_depth;
 }
 
 /*===========================================================================*/

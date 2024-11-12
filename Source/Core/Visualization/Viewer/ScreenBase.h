@@ -23,7 +23,7 @@ namespace kvs
 /*===========================================================================*/
 class ScreenBase
 {
-private:
+protected:
     int m_x = -1; ///< window position (y position)
     int m_y = -1; ///< window position (x position)
     int m_width = 512; ///< window size (width)

@@ -55,6 +55,115 @@ Camera::Camera()
     const auto u = kvs::Vec3( 0, 1, 0 ); // initial camera up-vector
     this->setPosition( p, a, u );
     this->saveXform();
+
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a Projection Type.
+ *  @param type [in] projection type
+ */
+/*==========================================================================*/
+ void Camera::setProjectionType( const ProjectionType type )
+{
+    m_projection_type = type;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a FieldOfView.
+ *  @param fov [in] fov
+ */
+/*==========================================================================*/
+ void Camera::setFieldOfView( const float fov )
+{
+    m_field_of_view = fov;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a back
+ *  @param back [in] back
+ */
+/*==========================================================================*/
+ void Camera::setBack( const float back )
+{
+    m_back = back;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a front
+ *  @param front [in] front
+ */
+ /*==========================================================================*/
+void Camera::setFront( const float front )
+{
+    m_front = front;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a left
+ *  @param left [in] left
+ */
+/*==========================================================================*/
+void Camera::setLeft( const float left )
+{
+    m_left = left;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a right
+ *  @param right [in] right
+ */
+/*==========================================================================*/
+void Camera::setRight( const float right )
+{
+    m_right = right;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a bottom
+ *  @param bottom [in] bottom
+ */
+/*==========================================================================*/
+void Camera::setBottom( const float bottom )
+{
+    m_bottom = bottom;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a top
+ *  @param top [in] top
+ */
+/*==========================================================================*/
+void Camera::setTop( const float top )
+{
+    m_top = top;
+    computeProjectionMatrix();
+}
+
+/*==========================================================================*/
+/**
+ *  Set a projection matrix
+ *  @param projection_matrix [in] projection matrix 
+ */
+/*==========================================================================*/
+ void Camera::setProjectionMatrix( const kvs::Mat4& projection_matrix )
+{
+    m_projection_matrix = projection_matrix;
 }
 
 /*==========================================================================*/
@@ -68,6 +177,8 @@ void Camera::setWindowSize( const size_t width, const size_t height )
 {
     m_window_width  = width;
     m_window_height = height;
+
+    computeProjectionMatrix();
 }
 
 /*==========================================================================*/
@@ -180,49 +291,7 @@ const kvs::Vec3 Camera::lookAt() const
 /*===========================================================================*/
 const kvs::Mat4 Camera::projectionMatrix() const
 {
-    const float aspect = static_cast<float>( m_window_width ) / m_window_height;
-
-    if ( m_projection_type == Camera::Perspective )
-    {
-        return kvs::PerspectiveMatrix44<float>( m_field_of_view, aspect, m_front, m_back );
-    }
-    else if ( m_projection_type == Camera::Orthogonal )
-    {
-        // Orthogonal camera mode
-        if ( aspect >= 1.0f )
-        {
-            return kvs::OrthogonalMatrix44<float>(
-                m_left * aspect,
-                m_right * aspect,
-                m_bottom, m_top,
-                m_front, m_back );
-        }
-        else
-        {
-            return kvs::OrthogonalMatrix44<float>(
-                m_left, m_right, 
-                m_bottom / aspect, m_top / aspect,
-                m_front, m_back );
-        }
-    }
-    else
-    {
-        // Frustum camera mode
-        if ( aspect >= 1.0f )
-        {
-            return kvs::FrustumMatrix44<float>(
-                m_left * aspect, m_right * aspect,
-                m_bottom, m_top,
-                m_front, m_back );
-        }
-        else
-        {
-            return kvs::FrustumMatrix44<float>(
-                m_left, m_right,
-                m_bottom / aspect, m_top / aspect,
-                m_front, m_back );
-        }
-    }
+    return m_projection_matrix;
 }
 
 /*===========================================================================*/
@@ -343,6 +412,57 @@ void Camera::translate( const kvs::Vec3& translation )
 void Camera::scale( const kvs::Vec3& scaling )
 {
     this->multiplyXform( kvs::Xform::Scaling( scaling ) );
+}
+
+/*==========================================================================*/
+/**
+ *  Compute Projection Matrix
+ */
+ /*==========================================================================*/
+void Camera::computeProjectionMatrix()
+{
+    const float aspect = static_cast<float>(m_window_width) / m_window_height;
+    if (m_projection_type == Camera::Perspective)
+    {
+        m_projection_matrix = kvs::PerspectiveMatrix44<float>(m_field_of_view, aspect, m_front, m_back);
+    }
+    else if (m_projection_type == Camera::Orthogonal)
+    {
+        // Orthogonal camera mode
+        if (aspect >= 1.0f)
+        {
+            m_projection_matrix = kvs::OrthogonalMatrix44<float>(
+                m_left * aspect,
+                m_right * aspect,
+                m_bottom, m_top,
+                m_front, m_back);
+        }
+        else
+        {
+            m_projection_matrix = kvs::OrthogonalMatrix44<float>(
+                m_left, m_right,
+                m_bottom / aspect, m_top / aspect,
+                m_front, m_back);
+        }
+    }
+    else
+    {
+        // Frustum camera mode
+        if (aspect >= 1.0f)
+        {
+            m_projection_matrix = kvs::FrustumMatrix44<float>(
+                m_left * aspect, m_right * aspect,
+                m_bottom, m_top,
+                m_front, m_back);
+        }
+        else
+        {
+            m_projection_matrix = kvs::FrustumMatrix44<float>(
+                m_left, m_right,
+                m_bottom / aspect, m_top / aspect,
+                m_front, m_back);
+        }
+    }
 }
 
 } // end of namespace kvs

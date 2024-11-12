@@ -124,6 +124,9 @@ void OrientationAxis::paintEvent()
             kvs::OpenGL::Disable( GL_TEXTURE_2D );
             kvs::OpenGL::Enable( GL_DEPTH_TEST );
 
+            kvs::OpenGL::SetClearDepth( 1.0 );
+            kvs::OpenGL::Clear( GL_DEPTH_BUFFER_BIT );
+
             // Anti-aliasing.
             if ( m_enable_anti_aliasing )
             {

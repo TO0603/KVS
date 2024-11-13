@@ -708,7 +708,7 @@ void LineRenderingFunction( const kvs::LineObject* line, const float dpr = 1.0f 
 
 #else
 
-void LineRenderingFunction( const kvs::LineObject* )
+void LineRenderingFunction( const kvs::LineObject* line, const float dpr = 1.0f )
 {
 }
 

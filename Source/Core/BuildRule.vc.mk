@@ -337,6 +337,7 @@ $(OUTDIR)\.\Visualization\Object\ImageObject.obj \
 $(OUTDIR)\.\Visualization\Object\LineObject.obj \
 $(OUTDIR)\.\Visualization\Object\ObjectBase.obj \
 $(OUTDIR)\.\Visualization\Object\PointObject.obj \
+$(OUTDIR)\.\Visualization\Object\PolygonGlyphObject.obj \
 $(OUTDIR)\.\Visualization\Object\PolygonObject.obj \
 $(OUTDIR)\.\Visualization\Object\StructuredVolumeObject.obj \
 $(OUTDIR)\.\Visualization\Object\StructuredVolumeObjectList.obj \

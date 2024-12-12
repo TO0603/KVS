@@ -319,6 +319,7 @@ Visualization/Object/ImageObject
 Visualization/Object/LineObject
 Visualization/Object/ObjectBase
 Visualization/Object/PointObject
+Visualization/Object/PolygonGlyphObject
 Visualization/Object/PolygonObject
 Visualization/Object/StructuredVolumeObject
 Visualization/Object/StructuredVolumeObjectList

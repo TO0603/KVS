@@ -73,6 +73,9 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 SUBDIRS += SupportOSMesa
 endif
 
+ifeq "$(KVS_SUPPORT_VTK)" "1"
+SUBDIRS += SupportVTK
+endif
 
 #=============================================================================
 #  build.
@@ -156,6 +159,11 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 	$(MKDIR) $(INSTALL_DIR)/include/kvs/osmesa
 	$(INSTALL) kvsSupportOSMesa $(INSTALL_DIR)/include
 	$(INSTALL) $(shell find kvs/osmesa -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/osmesa
+endif
+ifeq "$(KVS_SUPPORT_VTK)" "1"
+	$(MKDIR) $(INSTALL_DIR)/include/kvs/vtk
+	$(INSTALL) kvsSupportVTK $(INSTALL_DIR)/include
+	$(INSTALL) $(shell find kvs/vtk -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/vtk
 endif
 	for i in $(SUBDIRS); do \
 	$(MAKE) -C $$i $(MFLAGS) $(MAKEOVERRIDES) install; done

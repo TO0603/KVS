@@ -69,6 +69,7 @@ LIB_KVS_SUPPORT_PYTHON = kvsSupportPython.lib
 LIB_KVS_SUPPORT_MPI    = kvsSupportMPI.lib
 LIB_KVS_SUPPORT_EGL    = kvsSupportEGL.lib
 LIB_KVS_SUPPORT_OSMESA = kvsSupportOSMesa.lib
+LIB_KVS_SUPPORT_VTK    = kvsSupportVTK.lib
 
 
 #=============================================================================
@@ -273,6 +274,48 @@ EGL_LIBRARY_PATH = $(EGL_LIBRARY_PATH) /LIBPATH:"$(KVS_EGL_DIR)\lib"
 !ENDIF
 !ENDIF
 
+#=============================================================================
+#  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
+#=============================================================================
+!IF "$(KVS_SUPPORT_VTK)" == "1"
+VTK_INCLUDE_PATH = 
+VTK_LIBRARY_PATH = 
+VTK_LINK_LIBRARY = \
+vtksys-9.2.lib \
+vtkCommonCore-9.2.lib \
+vtkCommonExecutionModel-9.2.lib \
+vtkCommonDataModel-9.2.lib \
+vtkFiltersCore-9.2.lib \
+vtkFiltersExtraction-9.2.lib \
+vtkFiltersGeneral-9.2.lib \
+vtkFiltersGeometry-9.2.lib \
+vtkFiltersParallel-9.2.lib \
+vtkIOCore-9.2.lib \
+vtkIOGeometry-9.2.lib \
+vtkIOCGNSReader-9.2.lib \
+vtkIOEnSight-9.2.lib \
+vtkIOLegacy-9.2.lib \
+vtkIOParallel-9.2.lib \
+vtkIOXML-9.2.lib \
+vtkIOXMLParser-9.2.lib \
+vtkcgns-9.2.lib \
+vtkCommonMath-9.2.lib \
+vtkCommonMisc-9.2.lib \
+vtkCommonSystem-9.2.lib \
+vtkCommonTransforms-9.2.lib \
+vtkdoubleconversion-9.2.lib \
+vtkexpat-9.2.lib \
+vtkhdf5-9.2.lib \
+vtkloguru-9.2.lib \
+vtklz4-9.2.lib \
+vtklzma-9.2.lib \
+vtkParallelCore-9.2.lib \
+vtkpugixml-9.2.lib \
+vtkzlib-9.2.lib \
+User32.lib \
+Shell32.lib \
+Gdi32.lib \
+!ENDIF
 
 #=============================================================================
 #  Compiler option.

@@ -157,11 +157,15 @@ void StochasticRenderingCompositor::onWindowResized()
 
 void StochasticRenderingCompositor::onObjectChanged( Object* object, Renderer* renderer )
 {
+    kvs::Texture2D depthTexture;
+    depthTexture.create( m_ensemble_buffer.currentDepthTexture().width(), m_ensemble_buffer.currentDepthTexture().height() );
+    
     m_ensemble_buffer.clear();
 
     auto& engine = renderer->engine();
     if ( engine.object() ) engine.release();
-    engine.setDepthTexture( m_ensemble_buffer.currentDepthTexture() );
+    //engine.setDepthTexture( m_ensemble_buffer.currentDepthTexture() );
+    engine.setDepthTexture( depthTexture );
     engine.setShader( &renderer->shader() );
     engine.setRepetitionLevel( m_repetition_level );
     engine.setShadingEnabled( renderer->isShadingEnabled() );

@@ -36,7 +36,7 @@
 #include <vtkUnstructuredGrid.h>
 #include <vtkXMLDataParser.h>
 
-#include <kvs/vtk/STL>
+#include <kvs/vtk/Stl>
 #include <kvs/vtk/VtkXmlImageData>
 #include <kvs/vtk/VtkXmlPolyData>
 #include <kvs/vtk/VtkXmlRectilinearGrid>

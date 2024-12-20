@@ -121,7 +121,7 @@ LIB_KVS_SUPPORT_PYTHON    := libkvsSupportPython.a
 LIB_KVS_SUPPORT_MPI       := libkvsSupportMPI.a
 LIB_KVS_SUPPORT_EGL       := libkvsSupportEGL.a
 LIB_KVS_SUPPORT_OSMESA    := libkvsSupportOSMesa.a
-
+LIB_KVS_SUPPORT_VTK       := libkvsSupportVTK.a
 
 #=============================================================================
 #  Solution.
@@ -552,6 +552,31 @@ ifeq "$(KVS_SUPPORT_EGL)" "1"
   endif
 endif
 
+#=============================================================================
+#  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
+#=============================================================================
+ifeq "$(KVS_SUPPORT_VTK)" "1"
+VTK_INCLUDE_PATH := 
+VTK_LIBRARY_PATH := 
+VTK_LINK_LIBRARY := \
+-lvtksys-9.2 \
+-lvtkCommonCore-9.2 \
+-lvtkCommonExecutionModel-9.2 \
+-lvtkCommonDataModel-9.2 \
+-lvtkFiltersCore-9.2 \
+-lvtkFiltersExtraction-9.2 \
+-lvtkFiltersGeneral-9.2 \
+-lvtkFiltersGeometry-9.2 \
+-lvtkFiltersParallel-9.2 \
+-lvtkIOCore-9.2 \
+-lvtkIOGeometry-9.2 \
+-lvtkIOCGNSReader-9.2 \
+-lvtkIOEnSight-9.2 \
+-lvtkIOParallel-9.2 \
+-lvtkIOLegacy-9.2 \
+-lvtkIOXML-9.2 \
+-lvtkIOXMLParser-9.2
+endif
 
 #=============================================================================
 #  Compiler option.
@@ -562,7 +587,7 @@ CPPFLAGS :=
 
 # For Fujitsu C++ compiler (FCC/mpiFCC/FCCpx/mpiFCCpx)
 ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),FCC FCCpx mpiFCC mpiFCCpx))
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   ifdef DEBUG
     CPPFLAGS += -O0 -g
   else
@@ -575,7 +600,7 @@ ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),FCC FCCpx mpiFCC mpiFCCpx))
 
 # For Intel C++ compiler (icpc/mpiicpc)
 else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),icpc mpiicpc))
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   CPPFLAGS += -Wall
   ifdef DEBUG
     CPPFLAGS += -O0 -g
@@ -585,7 +610,7 @@ else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),icpc mpiicpc))
 
 # For Clang compiler (clang++)
 else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),clang++))
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   CPPFLAGS += -Wall
   ifdef DEBUG
     CPPFLAGS += -O0 -g
@@ -595,7 +620,7 @@ else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),clang++))
 
 # For g++
 else
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   CPPFLAGS += -Wall
   ifdef DEBUG
     CPPFLAGS += -O0 -ggdb3
@@ -752,6 +777,9 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
   DEFINITIONS += -DKVS_SUPPORT_OSMESA
 endif
 
+ifeq "$(KVS_SUPPORT_VTK)" "1"
+  DEFINITIONS += -DKVS_SUPPORT_VTK
+endif
 
 #=============================================================================
 #  Linker option.

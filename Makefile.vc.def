@@ -58,18 +58,18 @@ MAKEFILE = Makefile.vc
 #=============================================================================
 LIB_KVS_CORE = kvsCore.lib
 
-LIB_KVS_SUPPORT_CUDA   = libkvsSupportCUDA.lib
-LIB_KVS_SUPPORT_GLUT   = kvsSupportGLUT.lib
-LIB_KVS_SUPPORT_GLFW   = kvsSupportGLFW.lib
-LIB_KVS_SUPPORT_FFMPEG = kvsSupportFFmpeg.lib
-LIB_KVS_SUPPORT_QT     = kvsSupportQt.lib
-LIB_KVS_SUPPORT_OPENXR = kvsSupportOpenXR.lib
-LIB_KVS_SUPPORT_OPENCV = kvsSupportOpenCV.lib
-LIB_KVS_SUPPORT_PYTHON = kvsSupportPython.lib
-LIB_KVS_SUPPORT_MPI    = kvsSupportMPI.lib
-LIB_KVS_SUPPORT_EGL    = kvsSupportEGL.lib
-LIB_KVS_SUPPORT_OSMESA = kvsSupportOSMesa.lib
-LIB_KVS_SUPPORT_VTK    = kvsSupportVTK.lib
+LIB_KVS_SUPPORT_CUDA                 = libkvsSupportCUDA.lib
+LIB_KVS_SUPPORT_GLUT                 = kvsSupportGLUT.lib
+LIB_KVS_SUPPORT_GLFW                 = kvsSupportGLFW.lib
+LIB_KVS_SUPPORT_FFMPEG               = kvsSupportFFmpeg.lib
+LIB_KVS_SUPPORT_QT                   = kvsSupportQt.lib
+LIB_KVS_SUPPORT_OPENXR               = kvsSupportOpenXR.lib
+LIB_KVS_SUPPORT_OPENCV               = kvsSupportOpenCV.lib
+LIB_KVS_SUPPORT_PYTHON               = kvsSupportPython.lib
+LIB_KVS_SUPPORT_MPI                  = kvsSupportMPI.lib
+LIB_KVS_SUPPORT_EGL                  = kvsSupportEGL.lib
+LIB_KVS_SUPPORT_OSMESA               = kvsSupportOSMesa.lib
+LIB_KVS_SUPPORT_EXTENDED_FILE_FORMAT = kvsSupportExtendedFileFormat.lib
 
 
 #=============================================================================
@@ -277,9 +277,9 @@ EGL_LIBRARY_PATH = $(EGL_LIBRARY_PATH) /LIBPATH:"$(KVS_EGL_DIR)\lib"
 #=============================================================================
 #  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
 #=============================================================================
-!IF "$(KVS_SUPPORT_VTK)" == "1"
-VTK_INCLUDE_PATH = 
-VTK_LIBRARY_PATH = 
+!IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
+VTK_INCLUDE_PATH =
+VTK_LIBRARY_PATH =
 VTK_LINK_LIBRARY = \
 vtksys-9.2.lib \
 vtkCommonCore-9.2.lib \

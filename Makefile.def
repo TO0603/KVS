@@ -110,18 +110,18 @@ MAKEFILE := Makefile
 #=============================================================================
 LIB_KVS_CORE := libkvsCore.a
 
-LIB_KVS_SUPPORT_CAVE      := libkvsSupportCAVE.a
-LIB_KVS_SUPPORT_CUDA      := libkvsSupportCUDA.a
-LIB_KVS_SUPPORT_GLUT      := libkvsSupportGLUT.a
-LIB_KVS_SUPPORT_GLFW      := libkvsSupportGLFW.a
-LIB_KVS_SUPPORT_FFMPEG    := libkvsSupportFFmpeg.a
-LIB_KVS_SUPPORT_OPENCV    := libkvsSupportOpenCV.a
-LIB_KVS_SUPPORT_QT        := libkvsSupportQt.a
-LIB_KVS_SUPPORT_PYTHON    := libkvsSupportPython.a
-LIB_KVS_SUPPORT_MPI       := libkvsSupportMPI.a
-LIB_KVS_SUPPORT_EGL       := libkvsSupportEGL.a
-LIB_KVS_SUPPORT_OSMESA    := libkvsSupportOSMesa.a
-LIB_KVS_SUPPORT_VTK       := libkvsSupportVTK.a
+LIB_KVS_SUPPORT_CAVE                 := libkvsSupportCAVE.a
+LIB_KVS_SUPPORT_CUDA                 := libkvsSupportCUDA.a
+LIB_KVS_SUPPORT_GLUT                 := libkvsSupportGLUT.a
+LIB_KVS_SUPPORT_GLFW                 := libkvsSupportGLFW.a
+LIB_KVS_SUPPORT_FFMPEG               := libkvsSupportFFmpeg.a
+LIB_KVS_SUPPORT_OPENCV               := libkvsSupportOpenCV.a
+LIB_KVS_SUPPORT_QT                   := libkvsSupportQt.a
+LIB_KVS_SUPPORT_PYTHON               := libkvsSupportPython.a
+LIB_KVS_SUPPORT_MPI                  := libkvsSupportMPI.a
+LIB_KVS_SUPPORT_EGL                  := libkvsSupportEGL.a
+LIB_KVS_SUPPORT_OSMESA               := libkvsSupportOSMesa.a
+LIB_KVS_SUPPORT_EXTENDED_FILE_FORMAT := libkvsSupportExtendedFileFormat.a
 
 #=============================================================================
 #  Solution.
@@ -555,7 +555,7 @@ endif
 #=============================================================================
 #  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
 #=============================================================================
-ifeq "$(KVS_SUPPORT_VTK)" "1"
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
 VTK_INCLUDE_PATH := 
 VTK_LIBRARY_PATH := 
 VTK_LINK_LIBRARY := \
@@ -777,8 +777,8 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
   DEFINITIONS += -DKVS_SUPPORT_OSMESA
 endif
 
-ifeq "$(KVS_SUPPORT_VTK)" "1"
-  DEFINITIONS += -DKVS_SUPPORT_VTK
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+  DEFINITIONS += -DKVS_SUPPORT_EXTENDED_FILE_FORMAT
 endif
 
 #=============================================================================

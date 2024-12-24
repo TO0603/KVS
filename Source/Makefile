@@ -73,8 +73,8 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 SUBDIRS += SupportOSMesa
 endif
 
-ifeq "$(KVS_SUPPORT_VTK)" "1"
-SUBDIRS += SupportVTK
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+SUBDIRS += SupportExtendedFileFormat
 endif
 
 #=============================================================================
@@ -160,9 +160,9 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 	$(INSTALL) kvsSupportOSMesa $(INSTALL_DIR)/include
 	$(INSTALL) $(shell find kvs/osmesa -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/osmesa
 endif
-ifeq "$(KVS_SUPPORT_VTK)" "1"
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
 	$(MKDIR) $(INSTALL_DIR)/include/kvs/vtk
-	$(INSTALL) kvsSupportVTK $(INSTALL_DIR)/include
+	$(INSTALL) kvsSupportExtendedFileFormat $(INSTALL_DIR)/include
 	$(INSTALL) $(shell find kvs/vtk -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/vtk
 endif
 	for i in $(SUBDIRS); do \

@@ -73,8 +73,8 @@ SUBDIRS = $(SUBDIRS) SupportEGL
 SUBDIRS = $(SUBDIRS) SupportOSMesa
 !ENDIF
 
-!IF "$(KVS_SUPPORT_VTK)" == "1"
-SUBDIRS = $(SUBDIRS) SupportVTK
+!IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
+SUBDIRS = $(SUBDIRS) SupportExtendedFileFormat
 !ENDIF
 
 #=============================================================================
@@ -160,9 +160,9 @@ install:
 	$(INSTALL) kvsSupportOSMesa "$(INSTALL_DIR)\include"
 	$(INSTALL) kvs\osmesa\* "$(INSTALL_DIR)\include\kvs\osmesa"
 !ENDIF
-!IF "$(KVS_SUPPORT_VTK)" == "1"
+!IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
 	IF NOT EXIST "$(INSTALL_DIR)\include\kvs\vtk" $(MKDIR) "$(INSTALL_DIR)\include\kvs\vtk"
-	$(INSTALL) kvsSupportVTK "$(INSTALL_DIR)\include"
+	$(INSTALL) kvsSupportExtendedFileFormat "$(INSTALL_DIR)\include"
 	$(INSTALL) kvs\vtk\* "$(INSTALL_DIR)\include\kvs\vtk"
 !ENDIF
 	FOR %%i IN ( $(SUBDIRS) ) DO \

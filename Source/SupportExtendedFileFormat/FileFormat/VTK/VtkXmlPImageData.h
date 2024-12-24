@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT__VTK_XML_P_IMAGE_DATA_H_INCLUDE
-#define CVT__VTK_XML_P_IMAGE_DATA_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT__VTK_XML_P_IMAGE_DATA_H_INCLUDE
+#define EXTENDED_FILE_FORMAT__VTK_XML_P_IMAGE_DATA_H_INCLUDE
 #include "kvs/StructuredVolumeObject"
 #include <vtkStructuredGrid.h>
 #include <vtkXMLPImageDataReader.h>

@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT_VTK_IMPORTER_H_INCLUDE
-#define CVT_VTK_IMPORTER_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT_VTK_IMPORTER_H_INCLUDE
+#define EXTENDED_FILE_FORMAT_VTK_IMPORTER_H_INCLUDE
 
 #include "kvs/ImporterBase"
 #include "kvs/Message"

@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT__CVT_TYPE_TRAITS_H_INCLUDE
-#define CVT__CVT_TYPE_TRAITS_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT__CVT_TYPE_TRAITS_H_INCLUDE
+#define EXTENDED_FILE_FORMAT__CVT_TYPE_TRAITS_H_INCLUDE
 
 #include "kvs/PolygonObject"
 #include "kvs/StructuredVolumeObject"

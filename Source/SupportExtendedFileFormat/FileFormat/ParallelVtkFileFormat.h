@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT__PARALLEL_VTK_FILE_FORMAT_H_INCLUDE
-#define CVT__PARALLEL_VTK_FILE_FORMAT_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT__PARALLEL_VTK_FILE_FORMAT_H_INCLUDE
+#define EXTENDED_FILE_FORMAT__PARALLEL_VTK_FILE_FORMAT_H_INCLUDE
 #include <iterator>
 #include <string>
 

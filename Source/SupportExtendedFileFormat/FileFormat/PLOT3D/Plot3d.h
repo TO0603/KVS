@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT__PLOT3D_H_INCLUDE
-#define CVT__PLOT3D_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT__PLOT3D_H_INCLUDE
+#define EXTENDED_FILE_FORMAT__PLOT3D_H_INCLUDE
 #include <vtkMultiBlockDataSet.h>
 #include <vtkMultiBlockPLOT3DReader.h>
 

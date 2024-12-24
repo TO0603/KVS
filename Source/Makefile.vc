@@ -161,9 +161,9 @@ install:
 	$(INSTALL) kvs\osmesa\* "$(INSTALL_DIR)\include\kvs\osmesa"
 !ENDIF
 !IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
-	IF NOT EXIST "$(INSTALL_DIR)\include\kvs\vtk" $(MKDIR) "$(INSTALL_DIR)\include\kvs\vtk"
+	IF NOT EXIST "$(INSTALL_DIR)\include\kvs\extendedfileformat" $(MKDIR) "$(INSTALL_DIR)\include\kvs\extendedfileformat"
 	$(INSTALL) kvsSupportExtendedFileFormat "$(INSTALL_DIR)\include"
-	$(INSTALL) kvs\vtk\* "$(INSTALL_DIR)\include\kvs\vtk"
+	$(INSTALL) kvs\extendedfileformat\* "$(INSTALL_DIR)\include\kvs\extendedfileformat"
 !ENDIF
 	FOR %%i IN ( $(SUBDIRS) ) DO \
 	CD %%i && $(MAKE) /f $(MAKEFILE) /$(MAKEFLAGS) install && CD ..

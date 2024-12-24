@@ -161,9 +161,9 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 	$(INSTALL) $(shell find kvs/osmesa -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/osmesa
 endif
 ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
-	$(MKDIR) $(INSTALL_DIR)/include/kvs/vtk
+	$(MKDIR) $(INSTALL_DIR)/include/kvs/extendedfileformat
 	$(INSTALL) kvsSupportExtendedFileFormat $(INSTALL_DIR)/include
-	$(INSTALL) $(shell find kvs/vtk -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/vtk
+	$(INSTALL) $(shell find kvs/extendedfileformat -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/extendedfileformat
 endif
 	for i in $(SUBDIRS); do \
 	$(MAKE) -C $$i $(MFLAGS) $(MAKEOVERRIDES) install; done

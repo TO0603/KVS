@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT__UNSTRUCTURED_VOLUME_OBJECT_EXPORTER_H_INCLUDE
-#define CVT__UNSTRUCTURED_VOLUME_OBJECT_EXPORTER_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT__UNSTRUCTURED_VOLUME_OBJECT_EXPORTER_H_INCLUDE
+#define EXTENDED_FILE_FORMAT__UNSTRUCTURED_VOLUME_OBJECT_EXPORTER_H_INCLUDE
 // clang-format off
 #include "kvs/ObjectBase"
 // clang-format on

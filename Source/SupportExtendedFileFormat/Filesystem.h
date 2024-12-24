@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef CVT__FILESYSTEM_H_INCLUDE
-#define CVT__FILESYSTEM_H_INCLUDE
+#ifndef EXTENDED_FILE_FORMAT__FILESYSTEM_H_INCLUDE
+#define EXTENDED_FILE_FORMAT__FILESYSTEM_H_INCLUDE
 
 #pragma GCC warning                                                                                \
     "This header is for gcc < 8. This must be replaced with <filesystem> in the future"

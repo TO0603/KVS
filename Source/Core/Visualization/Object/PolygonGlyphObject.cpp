@@ -1,4 +1,4 @@
-/****************************************************************************/
+﻿/****************************************************************************/
 /**
  *  @file   PolygonGlyphObject.cpp
  *  @author TO0603
@@ -7,7 +7,7 @@
 #include "PolygonGlyphObject.h"
 #include <kvs/StructuredVolumeObject>
 #include <kvs/Quaternion>
-
+#define M_PI 3.14159265358979323846
 
 namespace kvs
 {

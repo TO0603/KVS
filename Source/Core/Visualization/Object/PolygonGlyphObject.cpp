@@ -79,7 +79,8 @@ kvs::PolygonGlyphObject::PolygonGlyphObject( const kvs::ValueArray<kvs::Real32> 
     m_directions( directions ),
     m_sizes( sizes ),
     m_colors( colors ),
-    m_type( type )
+    m_type( type ),
+    m_volume( nullptr )
 {
     switch ( m_type ) {
     case Arrow:

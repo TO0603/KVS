@@ -83,6 +83,7 @@ public:
     void setControlTargetToObject();
     void setControlTargetToCamera();
     void setControlTargetToLight();
+    kvs::openxr::OpenXRInteractor* openxrInteractor() const { return m_openxr_interactor; }
 
     const std::pair<int, int> registerObject( kvs::ObjectBase* object, kvs::RendererBase* renderer = 0 );
     const std::pair<int, int> registerObject( kvs::VisualizationPipeline* pipeline );

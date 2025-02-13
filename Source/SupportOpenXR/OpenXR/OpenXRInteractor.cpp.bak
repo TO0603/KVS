@@ -109,7 +109,6 @@ void OpenXRInteractor::initializeEvent()
     }
 #endif
 
-#if 0
     for ( kvs::UInt32 i = 0; i < kvs::Side::Max; ++i )
     {
         std::string path = i == kvs::Side::Left ?
@@ -119,7 +118,6 @@ void OpenXRInteractor::initializeEvent()
         renderer->setShader( kvs::Shader::Phong() );
         s->registerObject( m_controller_model[i], renderer );
     }
-#endif
 
     kvs::ValueArray<kvs::Real32> pointer_coords =
     {
@@ -222,6 +220,87 @@ void OpenXRInteractor::controllerPressEvent( kvs::ControllerEvent* e )
                     if ( j == kvs::Controller::Button::B )
                     {
                         kvsMessageDebug( "OpenXRInteractor::controllerPressEvent() controller(%d) Pressed B", i );
+                                                kvs::Xform currentObjectManagerXform = s->objectManager()->xform(); //現在の画面の平行移動、回転、スケーリングを取得する。
+                        float scalingFactor = 1 / ( s->objectManager()->xform().inverse() * s->object( s->numberOfObjects() - 1 )->xform() ).scaling().x();
+
+                        double leftXTranslation = m_left_hand_initial_translation.x() - ( ( currentObjectManagerXform.inverse() * m_left_hand->xform() ).translation().x() ) - currentObjectManagerXform.translation().x() * currentObjectManagerXform.inverse().scaling().x();
+                        double leftYTranslation = m_left_hand_initial_translation.y() - ( ( currentObjectManagerXform.inverse() * m_left_hand->xform() ).translation().y() ) - currentObjectManagerXform.translation().y() * currentObjectManagerXform.inverse().scaling().y();
+                        double leftZTranslation = m_left_hand_initial_translation.z() - ( ( currentObjectManagerXform.inverse() * m_left_hand->xform() ).translation().z() ) - currentObjectManagerXform.translation().z() * currentObjectManagerXform.inverse().scaling().z();
+
+                        double leftXCoordinateMovement = ( leftXTranslation * scalingFactor * -1 ) -
+                                                     ( currentObjectManagerXform.translation().x() * scalingFactor * currentObjectManagerXform.inverse().scaling().x() );
+                        double leftYCoordinateMovement = ( leftYTranslation * scalingFactor * -1 ) -
+                                                     ( currentObjectManagerXform.translation().y() * scalingFactor * currentObjectManagerXform.inverse().scaling().y() );
+                        double leftZCoordinateMovement = ( leftZTranslation * scalingFactor * -1 ) -
+                                                     ( currentObjectManagerXform.translation().z() * scalingFactor * currentObjectManagerXform.inverse().scaling().z() );
+
+                        double rightXTranslation = m_right_hand_initial_translation.x() - ( ( currentObjectManagerXform.inverse() * m_right_hand->xform() ).translation().x() ) - currentObjectManagerXform.translation().x() * currentObjectManagerXform.inverse().scaling().x();
+                        double rightYTranslation = m_right_hand_initial_translation.y() - ( ( currentObjectManagerXform.inverse() * m_right_hand->xform() ).translation().y() ) - currentObjectManagerXform.translation().y() * currentObjectManagerXform.inverse().scaling().y();
+                        double rightZTranslation = m_right_hand_initial_translation.z() - ( ( currentObjectManagerXform.inverse() * m_right_hand->xform() ).translation().z() ) - currentObjectManagerXform.translation().z() * currentObjectManagerXform.inverse().scaling().z();
+
+                        double rightXCoordinateMovement = ( rightXTranslation * scalingFactor * -1 ) -
+                                                         ( currentObjectManagerXform.translation().x() * scalingFactor * currentObjectManagerXform.inverse().scaling().x() );
+                        double rightYCoordinateMovement = ( rightYTranslation * scalingFactor * -1 ) -
+                                                         ( currentObjectManagerXform.translation().y() * scalingFactor * currentObjectManagerXform.inverse().scaling().y() );
+                        double rightZCoordinateMovement = ( rightZTranslation * scalingFactor * -1 ) -
+                                                         ( currentObjectManagerXform.translation().z() * scalingFactor * currentObjectManagerXform.inverse().scaling().z() );
+
+                        std::cout << "LEFT" << std::endl;
+                        std::cout << leftXCoordinateMovement << "," << leftYCoordinateMovement << "," << leftZCoordinateMovement << std::endl;
+                        std::cout << "RIGHT" << std::endl;
+                        std::cout << rightXCoordinateMovement << "," << rightYCoordinateMovement << "," << rightZCoordinateMovement << std::endl;
+
+                        // 点の数
+                        const size_t N = 2;
+                        // 線分の数
+                        const size_t L = 1;
+
+                        kvs::Real32 CoordArray[ N * 3 ] = {
+                            static_cast<kvs::Real32>(leftXCoordinateMovement), static_cast<kvs::Real32>(leftYCoordinateMovement), static_cast<kvs::Real32>(leftZCoordinateMovement),
+                            static_cast<kvs::Real32>(rightXCoordinateMovement), static_cast<kvs::Real32>(rightYCoordinateMovement), static_cast<kvs::Real32>(rightZCoordinateMovement),
+                        };
+
+                        // カラー値配列の定義
+                        kvs::UInt8 ColorArray[ N * 3 ] = {
+                            0, 255, 0,
+                            0, 255, 0,
+                        };
+
+                        kvs::UInt32 ConnectionArray[ L * 2 ] = {
+                            0, 1,  // 点0と点1を接続
+                        };
+
+                        kvs::ValueArray<kvs::Real32> coords( CoordArray, N * 3 );
+                        kvs::ValueArray<kvs::UInt8> colors( ColorArray, N * 3 );
+                        kvs::ValueArray<kvs::UInt32> connections( ConnectionArray, L * 2 );
+
+                        if( m_plot_line_object == nullptr )
+                        {
+                            m_plot_line_object = new kvs::LineObject();
+                            m_plot_line_object->setXform( s->objectManager()->xform( ) );
+                            m_plot_line_object->setCoords( coords );
+                            m_plot_line_object->setColors( colors );
+                            m_plot_line_object->setConnections( connections );
+                            m_plot_line_object->setSize( 10 );
+                            m_plot_line_object->setLineType( kvs::LineObject::Segment );
+                            m_plot_line_object->setColorType( kvs::LineObject::VertexColor );
+                            m_plot_line_object->setMinMaxObjectCoords( kvs::Vec3(0,0,0), kvs::Vec3(0,0,0) );
+                            m_plot_line_object->setMinMaxExternalCoords( kvs::Vec3(0,0,0), kvs::Vec3(0,0,0) );
+
+                            kvs::StochasticLineRenderer* renderer = new kvs::StochasticLineRenderer();
+                            m_plot_line_object_id = s->registerObject( m_plot_line_object, renderer );
+                        }
+                        else
+                        {
+                            m_plot_line_object = new kvs::LineObject( coords );
+                            m_plot_line_object->setXform( s->objectManager()->xform() );
+                            m_plot_line_object->setLineTypeToStrip();
+                            m_plot_line_object->setColorTypeToLine();
+                            m_plot_line_object->setColor( kvs::RGBColor::Green() );
+                            m_plot_line_object->setSize( 10 );
+                            m_plot_line_object->updateMinMaxCoords();
+                            s->replaceObject( m_plot_line_object_id.first, m_plot_line_object );
+                        }
                     }
                     if ( j == kvs::Controller::Button::X )
                     {

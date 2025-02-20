@@ -122,6 +122,8 @@ install::
 # FileFormat
 	IF NOT EXIST $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat $(MKDIR) $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat
 	$(INSTALL) .\FileFormat\*.h $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat
+	IF NOT EXIST $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\AVS $(MKDIR) $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\AVS
+	$(INSTALL) .\FileFormat\AVS\*.h $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\AVS
 	IF NOT EXIST $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\CGNS $(MKDIR) $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\CGNS
 	$(INSTALL) .\FileFormat\CGNS\*.h $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\CGNS
 	IF NOT EXIST $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\KVSML $(MKDIR) $(INSTALL_DIR)\include\SupportExtendedFileFormat\FileFormat\KVSML

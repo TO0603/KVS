@@ -54,23 +54,8 @@ include ../../Makefile.def
 #=============================================================================
 #  INCLUDE_PATH, LIBRARY_PATH, LINK_LIBRARY, INSTALL_DIR.
 #=============================================================================
-INCLUDE_PATH := -I..
-#ifdef KVS_INCLUDE_PATH
-#INCLUDE_PATH += -I$(KVS_INCLUDE_PATH)
-#endif
-ifdef VTK_INCLUDE_PATH
-INCLUDE_PATH += -I$(VTK_INCLUDE_PATH)
-endif
-
-LIBRARY_PATH := 
-#ifdef KVS_LIBRARY_PATH
-#LIBRARY_PATH += -L$(KVS_LIBRARY_PATH)
-#endif
-ifdef VTK_LIBRARY_PATH 
-LIBRARY_PATH += -L$(VTK_LIBRARY_PATH)
-endif
-
-#LINK_LIBRARY := $(KVS_LINK_LIBRARY) $(VTK_LINK_LIBRARY)
+INCLUDE_PATH := -I.. $(VTK_INCLUDE_PATH)
+LIBRARY_PATH := $(VTK_LIBRARY_PATH)
 LINK_LIBRARY := $(VTK_LINK_LIBRARY)
 INSTALL_DIR  := $(KVS_DIR)
 
@@ -94,43 +79,11 @@ $(TARGET_LIB): $(OBJECTS)
 	$(AR) $@ $^
 	$(RANLIB) $@
 
-LIBRARY_PATH := -L$(OUTDIR)
-ifdef KVS_LIBRARY_PATH
-LIBRARY_PATH += -L$(KVS_LIBRARY_PATH)
-endif
-ifdef VTK_LIBRARY_PATH 
-LIBRARY_PATH += -L$(VTK_LIBRARY_PATH)
-endif
-LINK_LIBRARY :=  -lkvsmlconverter $(KVS_LINK_LIBRARY) $(VTK_LINK_LIBRARY)
-
-#ifeq "$(findstring CYGWIN,$(shell uname -s))" "CYGWIN"
-#TARGET_EXE := $(OUTDIR)/$(KVSML_CONVERTER_BIN).exe
-#else
-#TARGET_EXE := $(OUTDIR)/$(KVSML_CONVERTER_BIN)
-#endif
-
-#$(TARGET_EXE): $(OUTDIR)/kvsml-converter.o $(TARGET_LIB)
-#	$(LD) $(LDFLAGS) $(LIBRARY_PATH) -o $@ $^ $(LINK_LIBRARY)
-
-#ifdef CVT_ENABLE_MPI
-#ifeq "$(findstring CYGWIN,$(shell uname -s))" "CYGWIN"
-#TARGET_EXE_MPI := $(OUTDIR)/$(KVSML_CONVERTER_MPI_BIN).exe
-#else
-#TARGET_EXE_MPI := $(OUTDIR)/$(KVSML_CONVERTER_MPI_BIN)
-#endif
-
-#$(TARGET_EXE_MPI): $(OUTDIR)/kvsml-converter-mpi.o $(TARGET_LIB) $(MPI_OBJECTS)
-#	$(LD) $(LDFLAGS) $(LIBRARY_PATH) -o $@ $^ $(LINK_LIBRARY)
-#endif
 
 #=============================================================================
 #  build.
 #=============================================================================
 build:: $(TARGET_LIB)
-#build:: $(TARGET_EXE)
-#ifdef CVT_ENABLE_MPI
-#build:: $(TARGET_EXE_MPI)
-#endif
 
 
 #=============================================================================
@@ -147,14 +100,6 @@ install::
 	$(MKDIR) $(INSTALL_DIR)/lib
 	$(INSTALL) $(TARGET_LIB) $(INSTALL_DIR)/lib
 	$(RANLIB) $(INSTALL_DIR)/lib/$(LIB_KVS_SUPPORT_EXTENDED_FILE_FORMAT)
-#install::
-#	$(MKDIR) $(INSTALL_DIR)/bin
-#	$(INSTALL_EXE) $(TARGET_EXE) $(INSTALL_DIR)/bin
-#ifdef CVT_ENABLE_MPI
-#install::
-#	$(MKDIR) $(INSTALL_DIR)/bin
-#	$(INSTALL_EXE) $(TARGET_EXE_MPI) $(INSTALL_DIR)/bin
-#endif
 
 #=============================================================================
 #  uninstall.

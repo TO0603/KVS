@@ -278,8 +278,31 @@ EGL_LIBRARY_PATH = $(EGL_LIBRARY_PATH) /LIBPATH:"$(KVS_EGL_DIR)\lib"
 #  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
 #=============================================================================
 !IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
-VTK_INCLUDE_PATH =
-VTK_LIBRARY_PATH =
+# /I<PATH>
+VTK_INCLUDE_PATH = 
+# /LIBPATH:<PATH>
+VTK_LIBRARY_PATH = 
+
+!IFDEF DEBUG
+VTK_LINK_LIBRARY = \
+vtksys-9.2d.lib \
+vtkCommonCore-9.2d.lib \
+vtkCommonExecutionModel-9.2d.lib \
+vtkCommonDataModel-9.2d.lib \
+vtkFiltersCore-9.2d.lib \
+vtkFiltersExtraction-9.2d.lib \
+vtkFiltersGeneral-9.2d.lib \
+vtkFiltersGeometry-9.2d.lib \
+vtkFiltersParallel-9.2d.lib \
+vtkIOCore-9.2d.lib \
+vtkIOGeometry-9.2d.lib \
+vtkIOCGNSReader-9.2d.lib \
+vtkIOEnSight-9.2d.lib \
+vtkIOLegacy-9.2d.lib \
+vtkIOParallel-9.2d.lib \
+vtkIOXML-9.2d.lib \
+vtkIOXMLParser-9.2d.lib
+!ELSE
 VTK_LINK_LIBRARY = \
 vtksys-9.2.lib \
 vtkCommonCore-9.2.lib \
@@ -297,30 +320,14 @@ vtkIOEnSight-9.2.lib \
 vtkIOLegacy-9.2.lib \
 vtkIOParallel-9.2.lib \
 vtkIOXML-9.2.lib \
-vtkIOXMLParser-9.2.lib \
-vtkcgns-9.2.lib \
-vtkCommonMath-9.2.lib \
-vtkCommonMisc-9.2.lib \
-vtkCommonSystem-9.2.lib \
-vtkCommonTransforms-9.2.lib \
-vtkdoubleconversion-9.2.lib \
-vtkexpat-9.2.lib \
-vtkhdf5-9.2.lib \
-vtkloguru-9.2.lib \
-vtklz4-9.2.lib \
-vtklzma-9.2.lib \
-vtkParallelCore-9.2.lib \
-vtkpugixml-9.2.lib \
-vtkzlib-9.2.lib \
-User32.lib \
-Shell32.lib \
-Gdi32.lib \
+vtkIOXMLParser-9.2.lib
+!ENDIF
 !ENDIF
 
 #=============================================================================
 #  Compiler option.
 #=============================================================================
-CPPFLAGS = /W3 /EHsc /GR
+CPPFLAGS = /std:c++17 /W3 /EHsc /GR
 
 !IFDEF DEBUG
 CPPFLAGS = $(CPPFLAGS) /Od /MTd

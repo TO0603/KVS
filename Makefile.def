@@ -556,7 +556,9 @@ endif
 #  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
 #=============================================================================
 ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+# -I<PATH>
 VTK_INCLUDE_PATH := 
+# -L<PATH>
 VTK_LIBRARY_PATH := 
 VTK_LINK_LIBRARY := \
 -lvtksys-9.2 \

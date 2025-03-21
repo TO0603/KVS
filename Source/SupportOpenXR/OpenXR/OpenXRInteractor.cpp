@@ -194,17 +194,17 @@ void OpenXRInteractor::controllerPressEvent( kvs::ControllerEvent* e )
                     if ( j == kvs::Controller::Button::Menu )
                     {
                         kvsMessageDebug( "OpenXRInteractor::controllerPressEvent() controller(%d) Pressed Menu", i );
-                        if ( m_remote_desktop )
-                        {
-                            m_remote_desktop->setVisible( !m_remote_desktop->visible() );
-                            if ( m_remote_desktop->visible() )
-                            {
-                                kvs::Xform head_xform = m_openxr_screen->walkthrough() * m_openxr_screen->headXform();
-                                kvs::Xform rdp_offset_xform = kvs::Xform::Translation( kvs::Vec3( 0.0f, 0.2f, -1.0f ) );
-                                kvs::Xform rdp_xform = head_xform * rdp_offset_xform;
-                                m_remote_desktop->setRDPXform( rdp_xform );
-                            }
-                        }
+                        // if ( m_remote_desktop )
+                        // {
+                        //     m_remote_desktop->setVisible( !m_remote_desktop->visible() );
+                        //     if ( m_remote_desktop->visible() )
+                        //     {
+                        //         kvs::Xform head_xform = m_openxr_screen->walkthrough() * m_openxr_screen->headXform();
+                        //         kvs::Xform rdp_offset_xform = kvs::Xform::Translation( kvs::Vec3( 0.0f, 0.2f, -1.0f ) );
+                        //         kvs::Xform rdp_xform = head_xform * rdp_offset_xform;
+                        //         m_remote_desktop->setRDPXform( rdp_xform );
+                        //     }
+                        // }
                     }
                     if ( j == kvs::Controller::Button::A )
                     {
@@ -213,17 +213,17 @@ void OpenXRInteractor::controllerPressEvent( kvs::ControllerEvent* e )
                     if ( j == kvs::Controller::Button::B )
                     {
                         kvsMessageDebug( "OpenXRInteractor::controllerPressEvent() controller(%d) Pressed B", i );
-                        if ( m_remote_desktop )
-                        {
-                            m_remote_desktop->setVisible( !m_remote_desktop->visible() );
-                            if ( m_remote_desktop->visible() )
-                            {
-                                kvs::Xform head_xform = m_openxr_screen->walkthrough() * m_openxr_screen->headXform();
-                                kvs::Xform rdp_offset_xform = kvs::Xform::Translation( kvs::Vec3( 0.0f, 0.2f, -1.0f ) );
-                                kvs::Xform rdp_xform = head_xform * rdp_offset_xform;
-                                m_remote_desktop->setRDPXform( rdp_xform );
-                            }
-                        }
+                        // if ( m_remote_desktop )
+                        // {
+                        //     m_remote_desktop->setVisible( !m_remote_desktop->visible() );
+                        //     if ( m_remote_desktop->visible() )
+                        //     {
+                        //         kvs::Xform head_xform = m_openxr_screen->walkthrough() * m_openxr_screen->headXform();
+                        //         kvs::Xform rdp_offset_xform = kvs::Xform::Translation( kvs::Vec3( 0.0f, 0.2f, -1.0f ) );
+                        //         kvs::Xform rdp_xform = head_xform * rdp_offset_xform;
+                        //         m_remote_desktop->setRDPXform( rdp_xform );
+                        //     }
+                        // }
                     }
                     if ( j == kvs::Controller::Button::X )
                     {
@@ -232,17 +232,17 @@ void OpenXRInteractor::controllerPressEvent( kvs::ControllerEvent* e )
                     if ( j == kvs::Controller::Button::Y )
                     {
                         kvsMessageDebug( "OpenXRInteractor::controllerPressEvent() controller(%d) Pressed Y", i );
-                        if ( m_remote_desktop )
-                        {
-                            m_remote_desktop->setVisible( !m_remote_desktop->visible() );
-                            if ( m_remote_desktop->visible() )
-                            {
-                                kvs::Xform head_xform = m_openxr_screen->walkthrough() * m_openxr_screen->headXform();
-                                kvs::Xform rdp_offset_xform = kvs::Xform::Translation( kvs::Vec3( 0.0f, 0.2f, -1.0f ) );
-                                kvs::Xform rdp_xform = head_xform * rdp_offset_xform;
-                                m_remote_desktop->setRDPXform( rdp_xform );
-                            }
-                        }
+                        // if ( m_remote_desktop )
+                        // {
+                        //     m_remote_desktop->setVisible( !m_remote_desktop->visible() );
+                        //     if ( m_remote_desktop->visible() )
+                        //     {
+                        //         kvs::Xform head_xform = m_openxr_screen->walkthrough() * m_openxr_screen->headXform();
+                        //         kvs::Xform rdp_offset_xform = kvs::Xform::Translation( kvs::Vec3( 0.0f, 0.2f, -1.0f ) );
+                        //         kvs::Xform rdp_xform = head_xform * rdp_offset_xform;
+                        //         m_remote_desktop->setRDPXform( rdp_xform );
+                        //     }
+                        // }
                     }
                 }
             }

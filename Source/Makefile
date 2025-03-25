@@ -73,6 +73,9 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 SUBDIRS += SupportOSMesa
 endif
 
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+SUBDIRS += SupportExtendedFileFormat
+endif
 
 #=============================================================================
 #  build.
@@ -156,6 +159,11 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
 	$(MKDIR) $(INSTALL_DIR)/include/kvs/osmesa
 	$(INSTALL) kvsSupportOSMesa $(INSTALL_DIR)/include
 	$(INSTALL) $(shell find kvs/osmesa -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/osmesa
+endif
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+	$(MKDIR) $(INSTALL_DIR)/include/kvs/extendedfileformat
+	$(INSTALL) kvsSupportExtendedFileFormat $(INSTALL_DIR)/include
+	$(INSTALL) $(shell find kvs/extendedfileformat -maxdepth 1 -type f) $(INSTALL_DIR)/include/kvs/extendedfileformat
 endif
 	for i in $(SUBDIRS); do \
 	$(MAKE) -C $$i $(MFLAGS) $(MAKEOVERRIDES) install; done

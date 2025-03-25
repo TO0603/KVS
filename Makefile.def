@@ -110,18 +110,18 @@ MAKEFILE := Makefile
 #=============================================================================
 LIB_KVS_CORE := libkvsCore.a
 
-LIB_KVS_SUPPORT_CAVE      := libkvsSupportCAVE.a
-LIB_KVS_SUPPORT_CUDA      := libkvsSupportCUDA.a
-LIB_KVS_SUPPORT_GLUT      := libkvsSupportGLUT.a
-LIB_KVS_SUPPORT_GLFW      := libkvsSupportGLFW.a
-LIB_KVS_SUPPORT_FFMPEG    := libkvsSupportFFmpeg.a
-LIB_KVS_SUPPORT_OPENCV    := libkvsSupportOpenCV.a
-LIB_KVS_SUPPORT_QT        := libkvsSupportQt.a
-LIB_KVS_SUPPORT_PYTHON    := libkvsSupportPython.a
-LIB_KVS_SUPPORT_MPI       := libkvsSupportMPI.a
-LIB_KVS_SUPPORT_EGL       := libkvsSupportEGL.a
-LIB_KVS_SUPPORT_OSMESA    := libkvsSupportOSMesa.a
-
+LIB_KVS_SUPPORT_CAVE                 := libkvsSupportCAVE.a
+LIB_KVS_SUPPORT_CUDA                 := libkvsSupportCUDA.a
+LIB_KVS_SUPPORT_GLUT                 := libkvsSupportGLUT.a
+LIB_KVS_SUPPORT_GLFW                 := libkvsSupportGLFW.a
+LIB_KVS_SUPPORT_FFMPEG               := libkvsSupportFFmpeg.a
+LIB_KVS_SUPPORT_OPENCV               := libkvsSupportOpenCV.a
+LIB_KVS_SUPPORT_QT                   := libkvsSupportQt.a
+LIB_KVS_SUPPORT_PYTHON               := libkvsSupportPython.a
+LIB_KVS_SUPPORT_MPI                  := libkvsSupportMPI.a
+LIB_KVS_SUPPORT_EGL                  := libkvsSupportEGL.a
+LIB_KVS_SUPPORT_OSMESA               := libkvsSupportOSMesa.a
+LIB_KVS_SUPPORT_EXTENDED_FILE_FORMAT := libkvsSupportExtendedFileFormat.a
 
 #=============================================================================
 #  Solution.
@@ -552,6 +552,33 @@ ifeq "$(KVS_SUPPORT_EGL)" "1"
   endif
 endif
 
+#=============================================================================
+#  VTK_INCLUDE_PATH, VTK_LIBRARY_PATH, VTK_LINK_LIBRARY, VTK_INSTALL_DIR.
+#=============================================================================
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+# -I<PATH>
+VTK_INCLUDE_PATH := -I$(VTK_DIR)/include/vtk-$(VTK_VERSION)
+# -L<PATH>
+VTK_LIBRARY_PATH := -L$(VTK_DIR)/lib
+VTK_LINK_LIBRARY := \
+-lvtksys-$(VTK_VERSION) \
+-lvtkCommonCore-$(VTK_VERSION) \
+-lvtkCommonExecutionModel-$(VTK_VERSION) \
+-lvtkCommonDataModel-$(VTK_VERSION) \
+-lvtkFiltersCore-$(VTK_VERSION) \
+-lvtkFiltersExtraction-$(VTK_VERSION) \
+-lvtkFiltersGeneral-$(VTK_VERSION) \
+-lvtkFiltersGeometry-$(VTK_VERSION) \
+-lvtkFiltersParallel-$(VTK_VERSION) \
+-lvtkIOCore-$(VTK_VERSION) \
+-lvtkIOGeometry-$(VTK_VERSION) \
+-lvtkIOCGNSReader-$(VTK_VERSION) \
+-lvtkIOEnSight-$(VTK_VERSION) \
+-lvtkIOParallel-$(VTK_VERSION) \
+-lvtkIOLegacy-$(VTK_VERSION) \
+-lvtkIOXML-$(VTK_VERSION) \
+-lvtkIOXMLParser-$(VTK_VERSION)
+endif
 
 #=============================================================================
 #  Compiler option.
@@ -562,7 +589,7 @@ CPPFLAGS :=
 
 # For Fujitsu C++ compiler (FCC/mpiFCC/FCCpx/mpiFCCpx)
 ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),FCC FCCpx mpiFCC mpiFCCpx))
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   ifdef DEBUG
     CPPFLAGS += -O0 -g
   else
@@ -575,7 +602,7 @@ ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),FCC FCCpx mpiFCC mpiFCCpx))
 
 # For Intel C++ compiler (icpc/mpiicpc)
 else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),icpc mpiicpc))
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   CPPFLAGS += -Wall
   ifdef DEBUG
     CPPFLAGS += -O0 -g
@@ -585,7 +612,7 @@ else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),icpc mpiicpc))
 
 # For Clang compiler (clang++)
 else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),clang++))
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   CPPFLAGS += -Wall
   ifdef DEBUG
     CPPFLAGS += -O0 -g
@@ -595,7 +622,7 @@ else ifeq ($(KVS_CPP),$(findstring $(KVS_CPP),clang++))
 
 # For g++
 else
-  CPPFLAGS += -std=c++14
+  CPPFLAGS += -std=c++17
   CPPFLAGS += -Wall
   ifdef DEBUG
     CPPFLAGS += -O0 -ggdb3
@@ -752,6 +779,9 @@ ifeq "$(KVS_SUPPORT_OSMESA)" "1"
   DEFINITIONS += -DKVS_SUPPORT_OSMESA
 endif
 
+ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
+  DEFINITIONS += -DKVS_SUPPORT_EXTENDED_FILE_FORMAT
+endif
 
 #=============================================================================
 #  Linker option.

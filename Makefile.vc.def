@@ -279,48 +279,48 @@ EGL_LIBRARY_PATH = $(EGL_LIBRARY_PATH) /LIBPATH:"$(KVS_EGL_DIR)\lib"
 #=============================================================================
 !IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
 # /I<PATH>
-VTK_INCLUDE_PATH = 
+VTK_INCLUDE_PATH = /I"$(VTK_DIR)\include\vtk-$(VTK_VERSION)"
 # /LIBPATH:<PATH>
-VTK_LIBRARY_PATH = 
+VTK_LIBRARY_PATH = /LIBPATH:"$(VTK_DIR)\lib"
 
 !IFDEF DEBUG
 VTK_LINK_LIBRARY = \
-vtksys-9.2d.lib \
-vtkCommonCore-9.2d.lib \
-vtkCommonExecutionModel-9.2d.lib \
-vtkCommonDataModel-9.2d.lib \
-vtkFiltersCore-9.2d.lib \
-vtkFiltersExtraction-9.2d.lib \
-vtkFiltersGeneral-9.2d.lib \
-vtkFiltersGeometry-9.2d.lib \
-vtkFiltersParallel-9.2d.lib \
-vtkIOCore-9.2d.lib \
-vtkIOGeometry-9.2d.lib \
-vtkIOCGNSReader-9.2d.lib \
-vtkIOEnSight-9.2d.lib \
-vtkIOLegacy-9.2d.lib \
-vtkIOParallel-9.2d.lib \
-vtkIOXML-9.2d.lib \
-vtkIOXMLParser-9.2d.lib
+vtksys-$(VTK_VERSION)d.lib \
+vtkCommonCore-$(VTK_VERSION)d.lib \
+vtkCommonExecutionModel-$(VTK_VERSION)d.lib \
+vtkCommonDataModel-$(VTK_VERSION)d.lib \
+vtkFiltersCore-$(VTK_VERSION)d.lib \
+vtkFiltersExtraction-$(VTK_VERSION)d.lib \
+vtkFiltersGeneral-$(VTK_VERSION)d.lib \
+vtkFiltersGeometry-$(VTK_VERSION)d.lib \
+vtkFiltersParallel-$(VTK_VERSION)d.lib \
+vtkIOCore-$(VTK_VERSION)d.lib \
+vtkIOGeometry-$(VTK_VERSION)d.lib \
+vtkIOCGNSReader-$(VTK_VERSION)d.lib \
+vtkIOEnSight-$(VTK_VERSION)d.lib \
+vtkIOLegacy-$(VTK_VERSION)d.lib \
+vtkIOParallel-$(VTK_VERSION)d.lib \
+vtkIOXML-$(VTK_VERSION)d.lib \
+vtkIOXMLParser-$(VTK_VERSION)d.lib
 !ELSE
 VTK_LINK_LIBRARY = \
-vtksys-9.2.lib \
-vtkCommonCore-9.2.lib \
-vtkCommonExecutionModel-9.2.lib \
-vtkCommonDataModel-9.2.lib \
-vtkFiltersCore-9.2.lib \
-vtkFiltersExtraction-9.2.lib \
-vtkFiltersGeneral-9.2.lib \
-vtkFiltersGeometry-9.2.lib \
-vtkFiltersParallel-9.2.lib \
-vtkIOCore-9.2.lib \
-vtkIOGeometry-9.2.lib \
-vtkIOCGNSReader-9.2.lib \
-vtkIOEnSight-9.2.lib \
-vtkIOLegacy-9.2.lib \
-vtkIOParallel-9.2.lib \
-vtkIOXML-9.2.lib \
-vtkIOXMLParser-9.2.lib
+vtksys-$(VTK_VERSION).lib \
+vtkCommonCore-$(VTK_VERSION).lib \
+vtkCommonExecutionModel-$(VTK_VERSION).lib \
+vtkCommonDataModel-$(VTK_VERSION).lib \
+vtkFiltersCore-$(VTK_VERSION).lib \
+vtkFiltersExtraction-$(VTK_VERSION).lib \
+vtkFiltersGeneral-$(VTK_VERSION).lib \
+vtkFiltersGeometry-$(VTK_VERSION).lib \
+vtkFiltersParallel-$(VTK_VERSION).lib \
+vtkIOCore-$(VTK_VERSION).lib \
+vtkIOGeometry-$(VTK_VERSION).lib \
+vtkIOCGNSReader-$(VTK_VERSION).lib \
+vtkIOEnSight-$(VTK_VERSION).lib \
+vtkIOLegacy-$(VTK_VERSION).lib \
+vtkIOParallel-$(VTK_VERSION).lib \
+vtkIOXML-$(VTK_VERSION).lib \
+vtkIOXMLParser-$(VTK_VERSION).lib
 !ENDIF
 !ENDIF
 

@@ -557,27 +557,27 @@ endif
 #=============================================================================
 ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
 # -I<PATH>
-VTK_INCLUDE_PATH := 
+VTK_INCLUDE_PATH := -I$(VTK_DIR)/include/vtk-$(VTK_VERSION)
 # -L<PATH>
-VTK_LIBRARY_PATH := 
+VTK_LIBRARY_PATH := -L$(VTK_DIR)/lib
 VTK_LINK_LIBRARY := \
--lvtksys-9.2 \
--lvtkCommonCore-9.2 \
--lvtkCommonExecutionModel-9.2 \
--lvtkCommonDataModel-9.2 \
--lvtkFiltersCore-9.2 \
--lvtkFiltersExtraction-9.2 \
--lvtkFiltersGeneral-9.2 \
--lvtkFiltersGeometry-9.2 \
--lvtkFiltersParallel-9.2 \
--lvtkIOCore-9.2 \
--lvtkIOGeometry-9.2 \
--lvtkIOCGNSReader-9.2 \
--lvtkIOEnSight-9.2 \
--lvtkIOParallel-9.2 \
--lvtkIOLegacy-9.2 \
--lvtkIOXML-9.2 \
--lvtkIOXMLParser-9.2
+-lvtksys-$(VTK_VERSION) \
+-lvtkCommonCore-$(VTK_VERSION) \
+-lvtkCommonExecutionModel-$(VTK_VERSION) \
+-lvtkCommonDataModel-$(VTK_VERSION) \
+-lvtkFiltersCore-$(VTK_VERSION) \
+-lvtkFiltersExtraction-$(VTK_VERSION) \
+-lvtkFiltersGeneral-$(VTK_VERSION) \
+-lvtkFiltersGeometry-$(VTK_VERSION) \
+-lvtkFiltersParallel-$(VTK_VERSION) \
+-lvtkIOCore-$(VTK_VERSION) \
+-lvtkIOGeometry-$(VTK_VERSION) \
+-lvtkIOCGNSReader-$(VTK_VERSION) \
+-lvtkIOEnSight-$(VTK_VERSION) \
+-lvtkIOParallel-$(VTK_VERSION) \
+-lvtkIOLegacy-$(VTK_VERSION) \
+-lvtkIOXML-$(VTK_VERSION) \
+-lvtkIOXMLParser-$(VTK_VERSION)
 endif
 
 #=============================================================================

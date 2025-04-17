@@ -480,6 +480,7 @@ void kvs::ExtendedFileFormat::detail::ImportUniformStructuredVolumeObject( kvs::
     kvs::Vector3f min_obj_coord( bounding_box[0], bounding_box[2], bounding_box[4] );
     kvs::Vector3f max_obj_coord( bounding_box[1], bounding_box[3], bounding_box[5] );
     uniform_object->setMinMaxObjectCoords( min_obj_coord, max_obj_coord );
+    uniform_object->setMinMaxExternalCoords( min_obj_coord, max_obj_coord );
 
     uniform_object->setGridType( kvs::StructuredVolumeObject::Uniform );
     uniform_object->setResolution( ::GetResolution( data ) );
@@ -492,7 +493,6 @@ void kvs::ExtendedFileFormat::detail::ImportUniformStructuredVolumeObject( kvs::
         uniform_object->setValues( values );
         uniform_object->updateMinMaxValues();
     }
-    uniform_object->updateMinMaxCoords();
 }
 
 void kvs::ExtendedFileFormat::detail::ImportIrregularStructuredVolumeObject(

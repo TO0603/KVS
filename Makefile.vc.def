@@ -279,9 +279,9 @@ EGL_LIBRARY_PATH = $(EGL_LIBRARY_PATH) /LIBPATH:"$(KVS_EGL_DIR)\lib"
 #=============================================================================
 !IF "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" == "1"
 # /I<PATH>
-VTK_INCLUDE_PATH = /I"$(VTK_DIR)\include\vtk-$(VTK_VERSION)"
+VTK_INCLUDE_OPTION = /I"$(VTK_INCLUDE_PATH)"
 # /LIBPATH:<PATH>
-VTK_LIBRARY_PATH = /LIBPATH:"$(VTK_DIR)\lib"
+VTK_LIBRARY_OPTION = /LIBPATH:"$(VTK_LIB_PATH)"
 
 !IFDEF DEBUG
 VTK_LINK_LIBRARY = \

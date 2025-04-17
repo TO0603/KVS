@@ -557,9 +557,9 @@ endif
 #=============================================================================
 ifeq "$(KVS_SUPPORT_EXTENDED_FILE_FORMAT)" "1"
 # -I<PATH>
-VTK_INCLUDE_PATH := -I$(VTK_DIR)/include/vtk-$(VTK_VERSION)
+VTK_INCLUDE_OPTION := -I$(VTK_INCLUDE_PATH)
 # -L<PATH>
-VTK_LIBRARY_PATH := -L$(VTK_DIR)/lib
+VTK_LIBRARY_OPTION := -L$(VTK_LIB_PATH)
 VTK_LINK_LIBRARY := \
 -lvtksys-$(VTK_VERSION) \
 -lvtkCommonCore-$(VTK_VERSION) \

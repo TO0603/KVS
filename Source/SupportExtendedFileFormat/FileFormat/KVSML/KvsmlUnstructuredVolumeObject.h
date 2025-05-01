@@ -86,11 +86,11 @@ public:
                    << sub_volume_count;
             auto merged_base = stream.str();
 
-            std::filesystem::path path = directory;
+            kvs::ExtendedFileFormat::filesystem::path path = directory;
             path.make_preferred();
-            if ( !std::filesystem::exists( path ) )
+            if ( !kvs::ExtendedFileFormat::filesystem::exists( path ) )
             {
-                if ( !std::filesystem::create_directories( path ) )
+                if ( !kvs::ExtendedFileFormat::filesystem::create_directories( path ) )
                 {
                     kvsMessageError( "Failed to create the directory" );
                     return false;
@@ -107,10 +107,10 @@ public:
             // Replace coords and connection file
             if ( share_0_step_coords && time_step != 0 )
             {
-                std::filesystem::path tmp = directory;
+                kvs::ExtendedFileFormat::filesystem::path tmp = directory;
                 tmp /= merged_base;
                 tmp += ".tmp";
-                std::filesystem::rename( path, tmp );
+                kvs::ExtendedFileFormat::filesystem::rename( path, tmp );
                 std::stringstream sss;
                 int zero_time_step = 0;
                 sss << base << "_" << std::setfill( '0' ) << std::right << std::setw( 5 )
@@ -136,17 +136,17 @@ public:
                     }
                 }
 
-                std::filesystem::remove( tmp );
+                kvs::ExtendedFileFormat::filesystem::remove( tmp );
 
-                std::filesystem::path coord = directory;
+                kvs::ExtendedFileFormat::filesystem::path coord = directory;
                 coord /= merged_base;
                 coord += "_coord.dat";
-                std::filesystem::remove( coord );
+                kvs::ExtendedFileFormat::filesystem::remove( coord );
 
-                std::filesystem::path connect = directory;
+                kvs::ExtendedFileFormat::filesystem::path connect = directory;
                 connect /= merged_base;
                 connect += "_connect.dat";
-                std::filesystem::remove( connect );
+                kvs::ExtendedFileFormat::filesystem::remove( connect );
             }
 
             setSuccess( true );
